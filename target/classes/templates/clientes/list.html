@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Clientes')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('clientes')}"></div>
+<main class="container py-4">
+    <section class="page-header mb-4">
+        <div>
+            <span class="hero-badge">Carteira de clientes</span>
+            <h1 class="display-title mt-2 mb-0">Clientes PF e PJ</h1>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-app" th:href="@{/clientes/pf/novo}">Novo PF</a>
+            <a class="btn btn-outline-dark" th:href="@{/clientes/pj/novo}">Novo PJ</a>
+        </div>
+    </section>
+
+    <div th:replace="~{fragments/messages :: messages}"></div>
+
+    <div class="card app-card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table app-table mb-0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Nome</th>
+                        <th>Documento</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Cidade</th>
+                        <th class="text-end">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(clientes)}">
+                        <td colspan="8" class="text-center text-secondary py-5">Nenhum cliente cadastrado até o momento.</td>
+                    </tr>
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.id}">1</td>
+                        <td><span class="badge text-bg-light" th:text="${cliente.tipoCliente}">PF</span></td>
+                        <td th:text="${cliente.nomeExibicao}">Nome</td>
+                        <td th:text="${cliente.documento}">000</td>
+                        <td th:text="${cliente.email}">mail</td>
+                        <td th:text="${cliente.telefone}">11999999999</td>
+                        <td th:text="${cliente.endereco.cidade + '/' + cliente.endereco.uf}">São Paulo/SP</td>
+                        <td class="text-end">
+                            <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
+                                <a class="btn btn-sm btn-outline-dark"
+                                   th:if="${cliente.class.simpleName == 'ClientePessoaFisica'}"
+                                   th:href="@{'/clientes/pf/' + ${cliente.id} + '/editar'}">Editar</a>
+                                <a class="btn btn-sm btn-outline-dark"
+                                   th:if="${cliente.class.simpleName == 'ClientePessoaJuridica'}"
+                                   th:href="@{'/clientes/pj/' + ${cliente.id} + '/editar'}">Editar</a>
+                                <form th:action="@{'/clientes/' + ${cliente.id} + '/excluir'}"
+                                      method="post"
+                                      class="d-inline"
+                                      data-confirm-delete
+                                      data-confirm-text="Deseja realmente excluir este cliente?">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Excluir</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="messages" class="mb-4">
+    <div class="alert alert-success shadow-sm" role="alert" th:if="${successMessage}" th:text="${successMessage}"></div>
+    <div class="alert alert-danger shadow-sm" role="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div class="alert alert-danger shadow-sm" role="alert" th:if="${#fields.hasGlobalErrors()}">
+        <div th:each="error : ${#fields.globalErrors()}" th:text="${error}"></div>
+    </div>
+</div>
+</body>
+</html>

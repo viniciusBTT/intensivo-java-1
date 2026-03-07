@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${tituloFormulario})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('clientes')}"></div>
+<main class="container py-4">
+    <section class="page-header mb-4">
+        <div>
+            <span class="hero-badge">Cadastro PJ</span>
+            <h1 class="display-title mt-2 mb-0" th:text="${tituloFormulario}">Novo Cliente PJ</h1>
+        </div>
+    </section>
+
+    <div th:replace="~{fragments/messages :: messages}"></div>
+
+    <form class="card app-card p-4"
+          th:action="@{${submitPath}}"
+          th:object="${form}"
+          method="post"
+          data-cep-form>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label" for="razaoSocial">Razão social</label>
+                <input id="razaoSocial" th:field="*{razaoSocial}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{razaoSocial}"></div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="nomeFantasia">Nome fantasia</label>
+                <input id="nomeFantasia" th:field="*{nomeFantasia}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{nomeFantasia}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="cnpj">CNPJ</label>
+                <input id="cnpj" th:field="*{cnpj}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{cnpj}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="email">Email</label>
+                <input id="email" th:field="*{email}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{email}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="telefone">Telefone</label>
+                <input id="telefone" th:field="*{telefone}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{telefone}"></div>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label" for="cep">CEP</label>
+                <input id="cep" th:field="*{cep}" class="form-control" data-cep-input>
+                <div class="invalid-feedback d-block" th:errors="*{cep}"></div>
+            </div>
+            <div class="col-md-8">
+                <label class="form-label" for="logradouro">Logradouro</label>
+                <input id="logradouro" th:field="*{logradouro}" class="form-control" data-cep-target="logradouro" readonly>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="numero">Número</label>
+                <input id="numero" th:field="*{numero}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{numero}"></div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="complemento">Complemento</label>
+                <input id="complemento" th:field="*{complemento}" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="bairro">Bairro</label>
+                <input id="bairro" th:field="*{bairro}" class="form-control" data-cep-target="bairro" readonly>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label" for="uf">UF</label>
+                <input id="uf" th:field="*{uf}" class="form-control" data-cep-target="uf" readonly>
+            </div>
+            <div class="col-md-5">
+                <label class="form-label" for="cidade">Cidade</label>
+                <input id="cidade" th:field="*{cidade}" class="form-control" data-cep-target="cidade" readonly>
+            </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-end mt-4">
+            <a class="btn btn-outline-dark" th:href="@{/clientes}">Cancelar</a>
+            <button class="btn btn-app" type="submit">Salvar cliente PJ</button>
+        </div>
+    </form>
+</main>
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

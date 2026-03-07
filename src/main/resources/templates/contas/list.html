@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Contas')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('contas')}"></div>
+<main class="container py-4">
+    <section class="page-header mb-4">
+        <div>
+            <span class="hero-badge">Gestão de contas</span>
+            <h1 class="display-title mt-2 mb-0">Contas correntes e jurídicas</h1>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-app" th:href="@{/contas/corrente/novo}">Nova corrente</a>
+            <a class="btn btn-outline-dark" th:href="@{/contas/juridica/novo}">Nova jurídica</a>
+        </div>
+    </section>
+
+    <div th:replace="~{fragments/messages :: messages}"></div>
+
+    <div class="card app-card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table app-table mb-0">
+                    <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Agência</th>
+                        <th>Tipo</th>
+                        <th>Titular</th>
+                        <th>Status</th>
+                        <th>Saldo inicial</th>
+                        <th>Tarifa</th>
+                        <th class="text-end">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(contas)}">
+                        <td colspan="8" class="text-center text-secondary py-5">Nenhuma conta cadastrada até o momento.</td>
+                    </tr>
+                    <tr th:each="conta : ${contas}">
+                        <td th:text="${conta.numero}">00000001</td>
+                        <td th:text="${conta.agencia}">0001</td>
+                        <td th:text="${conta.tipoConta}">Conta Corrente</td>
+                        <td th:text="${conta.cliente.nomeExibicao}">Titular</td>
+                        <td><span class="badge text-bg-light" th:text="${conta.status}">ATIVA</span></td>
+                        <td th:text="${#numbers.formatDecimal(conta.saldoInicial, 1, 'POINT', 2, 'COMMA')}">0,00</td>
+                        <td th:text="${#numbers.formatDecimal(conta.calcularTarifaMensal(), 1, 'POINT', 2, 'COMMA')}">0,00</td>
+                        <td class="text-end">
+                            <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
+                                <a class="btn btn-sm btn-outline-dark"
+                                   th:if="${conta.class.simpleName == 'ContaCorrente'}"
+                                   th:href="@{'/contas/corrente/' + ${conta.id} + '/editar'}">Editar</a>
+                                <a class="btn btn-sm btn-outline-dark"
+                                   th:if="${conta.class.simpleName == 'ContaJuridica'}"
+                                   th:href="@{'/contas/juridica/' + ${conta.id} + '/editar'}">Editar</a>
+                                <form th:action="@{'/contas/' + ${conta.id} + '/excluir'}"
+                                      method="post"
+                                      class="d-inline"
+                                      data-confirm-delete
+                                      data-confirm-text="Deseja realmente excluir esta conta?">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Excluir</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

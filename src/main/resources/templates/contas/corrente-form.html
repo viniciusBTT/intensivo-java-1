@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${tituloFormulario})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('contas')}"></div>
+<main class="container py-4">
+    <section class="page-header mb-4">
+        <div>
+            <span class="hero-badge">Conta corrente</span>
+            <h1 class="display-title mt-2 mb-0" th:text="${tituloFormulario}">Nova Conta Corrente</h1>
+        </div>
+    </section>
+
+    <div th:replace="~{fragments/messages :: messages}"></div>
+
+    <form class="card app-card p-4" th:action="@{${submitPath}}" th:object="${form}" method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label" for="clienteId">Cliente PF</label>
+                <select id="clienteId" th:field="*{clienteId}" class="form-select">
+                    <option value="">Selecione</option>
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nomeCompleto + ' - CPF ' + cliente.cpf}"></option>
+                </select>
+                <div class="invalid-feedback d-block" th:errors="*{clienteId}"></div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="saldoInicial">Saldo inicial</label>
+                <input id="saldoInicial" th:field="*{saldoInicial}" type="number" min="0" step="0.01" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{saldoInicial}"></div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="limiteChequeEspecial">Limite cheque especial</label>
+                <input id="limiteChequeEspecial" th:field="*{limiteChequeEspecial}" type="number" min="0" step="0.01" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{limiteChequeEspecial}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="status">Status</label>
+                <select id="status" th:field="*{status}" class="form-select">
+                    <option th:each="status : ${statusList}" th:value="${status}" th:text="${status}"></option>
+                </select>
+                <div class="invalid-feedback d-block" th:errors="*{status}"></div>
+            </div>
+            <div class="col-md-4" th:if="${modoEdicao}">
+                <label class="form-label">Agência</label>
+                <input class="form-control" th:value="${agenciaConta}" readonly>
+            </div>
+            <div class="col-md-4" th:if="${modoEdicao}">
+                <label class="form-label">Número da conta</label>
+                <input class="form-control" th:value="${numeroConta}" readonly>
+            </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-end mt-4">
+            <a class="btn btn-outline-dark" th:href="@{/contas}">Cancelar</a>
+            <button class="btn btn-app" type="submit">Salvar conta corrente</button>
+        </div>
+    </form>
+</main>
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

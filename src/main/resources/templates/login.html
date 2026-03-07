@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Login')}"></head>
+<body class="login-page">
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-xl-4">
+            <div class="hero-badge mb-3">Ambiente interno da agência</div>
+            <div class="card shadow-lg border-0 app-card">
+                <div class="card-body p-4 p-md-5">
+                    <h1 class="display-title mb-2">Entrar</h1>
+                    <p class="text-secondary mb-4">Use um usuário semeado no banco para acessar clientes, contas e a consulta de CEP.</p>
+
+                    <div class="alert alert-danger" th:if="${param.error}">
+                        Usuário ou senha inválidos.
+                    </div>
+                    <div class="alert alert-success" th:if="${param.logout}">
+                        Sessão encerrada com sucesso.
+                    </div>
+
+                    <form th:action="@{/login}" method="post" class="row g-3">
+                        <div class="col-12">
+                            <label for="username" class="form-label">Usuário</label>
+                            <input id="username" name="username" class="form-control form-control-lg" autocomplete="username">
+                        </div>
+                        <div class="col-12">
+                            <label for="password" class="form-label">Senha</label>
+                            <input id="password" type="password" name="password" class="form-control form-control-lg" autocomplete="current-password">
+                        </div>
+                        <div class="col-12 d-grid">
+                            <button class="btn btn-app btn-lg" type="submit">Acessar sistema</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

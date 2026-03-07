@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Erro interno')}"></head>
+<body>
+<main class="container py-5">
+    <div class="card app-card p-5 text-center">
+        <span class="hero-badge align-self-center">500</span>
+        <h1 class="display-title mt-3">Erro interno</h1>
+        <p class="text-secondary">Ocorreu uma falha inesperada. Revise os logs estruturados e tente novamente.</p>
+        <a class="btn btn-app align-self-center" th:href="@{/}">Retornar</a>
+    </div>
+</main>
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+</body>
+</html>

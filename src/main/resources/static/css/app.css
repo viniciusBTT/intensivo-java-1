@@ -1,0 +1,157 @@
+:root {
+    --app-bg: linear-gradient(180deg, #f4efe6 0%, #f9f6ef 35%, #eef4f2 100%);
+    --app-panel: rgba(255, 255, 255, 0.88);
+    --app-border: rgba(15, 23, 42, 0.08);
+    --app-text: #1f2937;
+    --app-muted: #5b6470;
+    --app-accent: #0f766e;
+    --app-accent-dark: #134e4a;
+    --app-highlight: #f59e0b;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--app-bg);
+    color: var(--app-text);
+    font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+.login-page {
+    display: flex;
+    align-items: center;
+}
+
+.app-navbar {
+    backdrop-filter: blur(14px);
+    background: rgba(255, 248, 240, 0.78);
+    border-bottom: 1px solid var(--app-border);
+}
+
+.navbar-brand,
+.display-title,
+.section-title {
+    font-family: "Literata", Georgia, serif;
+}
+
+.display-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.05;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .45rem .85rem;
+    border-radius: 999px;
+    background: rgba(245, 158, 11, 0.15);
+    color: #92400e;
+    font-size: .85rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.app-hero,
+.page-header {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.hero-actions {
+    display: flex;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.app-card,
+.metric-card {
+    border: 1px solid var(--app-border);
+    background: var(--app-panel);
+    border-radius: 24px;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+.metric-card {
+    padding: 1.6rem;
+}
+
+.metric-card.accent {
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(255, 255, 255, 0.9));
+}
+
+.metric-label {
+    display: block;
+    color: var(--app-muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .78rem;
+}
+
+.metric-value {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    line-height: 1;
+    margin: .7rem 0;
+}
+
+.metric-link {
+    color: var(--app-accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-app {
+    background: var(--app-accent);
+    border-color: var(--app-accent);
+    color: #fff;
+}
+
+.btn-app:hover,
+.btn-app:focus {
+    background: var(--app-accent-dark);
+    border-color: var(--app-accent-dark);
+    color: #fff;
+}
+
+.app-table thead th {
+    background: rgba(15, 118, 110, 0.06);
+    color: var(--app-muted);
+    font-size: .8rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.app-table td,
+.app-table th {
+    padding: 1rem 1.1rem;
+    vertical-align: middle;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 14px;
+    border-color: rgba(15, 23, 42, 0.12);
+    min-height: 48px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 .25rem rgba(15, 118, 110, 0.12);
+    border-color: rgba(15, 118, 110, 0.4);
+}
+
+@media (max-width: 768px) {
+    .app-card,
+    .metric-card {
+        border-radius: 20px;
+    }
+}
