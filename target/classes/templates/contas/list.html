@@ -48,10 +48,10 @@
                         <td class="text-end">
                             <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
                                 <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${conta.class.simpleName == 'ContaCorrente'}"
+                                   th:if="${conta.tipoConta == 'Conta Corrente'}"
                                    th:href="@{'/contas/corrente/' + ${conta.id} + '/editar'}">Editar</a>
                                 <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${conta.class.simpleName == 'ContaJuridica'}"
+                                   th:if="${conta.tipoConta == 'Conta Juridica'}"
                                    th:href="@{'/contas/juridica/' + ${conta.id} + '/editar'}">Editar</a>
                                 <form th:action="@{'/contas/' + ${conta.id} + '/excluir'}"
                                       method="post"

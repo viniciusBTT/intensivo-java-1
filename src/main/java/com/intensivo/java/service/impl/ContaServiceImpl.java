@@ -15,7 +15,7 @@ import com.intensivo.java.repository.ClientePessoaFisicaRepository;
 import com.intensivo.java.repository.ClientePessoaJuridicaRepository;
 import com.intensivo.java.repository.ContaRepository;
 import com.intensivo.java.service.ContaService;
-import com.intensivo.java.service.support.TextUtils;
+import com.intensivo.java.util.TextUtils;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.List;
@@ -45,6 +45,13 @@ public class ContaServiceImpl implements ContaService {
 
     @Override
     @Transactional(readOnly = true)
+    public Conta buscar(Long id) {
+        return contaRepository.findWithClienteById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Conta nao encontrada."));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<ClientePessoaFisica> listarClientesCorrente() {
         return clientePessoaFisicaRepository.findAllByOrderByNomeCompletoAsc();
     }
@@ -58,8 +65,7 @@ public class ContaServiceImpl implements ContaService {
     @Override
     @Transactional(readOnly = true)
     public ContaCorrente buscarContaCorrente(Long id) {
-        Conta conta = contaRepository.findWithClienteById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Conta corrente nao encontrada."));
+        Conta conta = buscar(id);
         if (conta instanceof ContaCorrente contaCorrente) {
             return contaCorrente;
         }
@@ -69,8 +75,7 @@ public class ContaServiceImpl implements ContaService {
     @Override
     @Transactional(readOnly = true)
     public ContaJuridica buscarContaJuridica(Long id) {
-        Conta conta = contaRepository.findWithClienteById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Conta juridica nao encontrada."));
+        Conta conta = buscar(id);
         if (conta instanceof ContaJuridica contaJuridica) {
             return contaJuridica;
         }
@@ -124,8 +129,7 @@ public class ContaServiceImpl implements ContaService {
     @Override
     @Transactional
     public void excluir(Long id) {
-        Conta conta = contaRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Conta nao encontrada."));
+        Conta conta = buscar(id);
         contaRepository.delete(conta);
         log.info("Conta {} excluida", conta.getNumero());
     }

@@ -5,9 +5,13 @@
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/config/RequestContextLoggingFilter.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/config/RestClientConfig.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/config/SecurityConfig.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/CepRestController.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/ClienteController.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/ClienteRestController.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/ContaController.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/ContaRestController.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/HomeController.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/support/RestPayloadMapper.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/ClienteForm.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/ClientePessoaFisicaForm.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/ClientePessoaJuridicaForm.java
@@ -15,6 +19,13 @@
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/ContaForm.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/ContaJuridicaForm.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/CepResponse.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/ClienteCreateRequest.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/ClienteResponse.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/ClienteRestType.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/ContaCreateRequest.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/ContaResponse.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/ContaRestType.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/EnderecoResponse.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/rest/RestErrorResponse.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/exception/BusinessException.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/exception/CepLookupException.java
@@ -24,6 +35,7 @@
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/exception/MvcExceptionHandler.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/exception/ResourceNotFoundException.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/exception/RestExceptionHandler.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/exception/RestValidationException.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/integration/ViaCepClient.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/model/BaseEntity.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/model/Cliente.java
@@ -41,7 +53,6 @@
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/repository/ClienteRepository.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/repository/ContaRepository.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/repository/UsuarioRepository.java
-/home/vinib/projetos/java/src/main/java/com/intensivo/java/restController/CepRestController.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/service/CepLookupService.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/service/ClienteService.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/service/ContaService.java
@@ -49,5 +60,5 @@
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/service/impl/ClienteServiceImpl.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/service/impl/ContaServiceImpl.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/service/impl/JpaUserDetailsService.java
-/home/vinib/projetos/java/src/main/java/com/intensivo/java/service/support/MaskingUtils.java
-/home/vinib/projetos/java/src/main/java/com/intensivo/java/service/support/TextUtils.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/util/MaskingUtils.java
+/home/vinib/projetos/java/src/main/java/com/intensivo/java/util/TextUtils.java

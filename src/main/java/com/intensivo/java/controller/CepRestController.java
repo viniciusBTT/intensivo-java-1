@@ -1,4 +1,4 @@
-package com.intensivo.java.restController;
+package com.intensivo.java.controller;
 
 import com.intensivo.java.dto.rest.CepResponse;
 import com.intensivo.java.service.CepLookupService;

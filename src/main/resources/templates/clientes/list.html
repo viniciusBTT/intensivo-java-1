@@ -48,10 +48,10 @@
                         <td class="text-end">
                             <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
                                 <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${cliente.class.simpleName == 'ClientePessoaFisica'}"
+                                   th:if="${cliente.tipoCliente == 'Pessoa Fisica'}"
                                    th:href="@{'/clientes/pf/' + ${cliente.id} + '/editar'}">Editar</a>
                                 <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${cliente.class.simpleName == 'ClientePessoaJuridica'}"
+                                   th:if="${cliente.tipoCliente == 'Pessoa Juridica'}"
                                    th:href="@{'/clientes/pj/' + ${cliente.id} + '/editar'}">Editar</a>
                                 <form th:action="@{'/clientes/' + ${cliente.id} + '/excluir'}"
                                       method="post"

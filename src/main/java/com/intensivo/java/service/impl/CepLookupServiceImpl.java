@@ -4,7 +4,7 @@ import com.intensivo.java.model.Endereco;
 import com.intensivo.java.dto.rest.CepResponse;
 import com.intensivo.java.integration.ViaCepClient;
 import com.intensivo.java.service.CepLookupService;
-import com.intensivo.java.service.support.TextUtils;
+import com.intensivo.java.util.TextUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

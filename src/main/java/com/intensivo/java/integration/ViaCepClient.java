@@ -2,7 +2,7 @@ package com.intensivo.java.integration;
 
 import com.intensivo.java.dto.rest.CepResponse;
 import com.intensivo.java.exception.CepLookupException;
-import com.intensivo.java.service.support.TextUtils;
+import com.intensivo.java.util.TextUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

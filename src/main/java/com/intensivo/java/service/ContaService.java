@@ -13,6 +13,8 @@ public interface ContaService {
 
     List<Conta> listarTodas();
 
+    Conta buscar(Long id);
+
     List<ClientePessoaFisica> listarClientesCorrente();
 
     List<ClientePessoaJuridica> listarClientesJuridicos();

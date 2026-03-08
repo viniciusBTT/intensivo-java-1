@@ -1,4 +1,4 @@
-package com.intensivo.java.service.support;
+package com.intensivo.java.util;
 
 public final class TextUtils {
 

@@ -24,10 +24,11 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
-        http.authorizeHttpRequests(authorize -> authorize
+                http.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/login", "/css/**", "/js/**", "/error").permitAll()
                         .requestMatchers(HttpMethod.POST, "/clientes/*/excluir", "/contas/*/excluir").hasRole("ADMIN")
-                        .requestMatchers("/clientes/**", "/contas/**", "/api/ceps/**", "/").hasAnyRole("ADMIN", "ATENDENTE")
+                        .requestMatchers("/clientes/**", "/contas/**", "/api/ceps/**", "/api/clientes/**", "/api/contas/**", "/")
+                        .hasAnyRole("ADMIN", "ATENDENTE")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")

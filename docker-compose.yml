@@ -5,8 +5,8 @@ services:
     environment:
       MYSQL_DATABASE: intensivo_java
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: intensivo
-      MYSQL_PASSWORD: intensivo
+      MYSQL_USER: root
+      MYSQL_PASSWORD: senha234
     ports:
       - "3306:3306"
     volumes:

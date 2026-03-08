@@ -11,6 +11,8 @@ public interface ClienteService {
 
     List<Cliente> listarTodos();
 
+    Cliente buscar(Long id);
+
     List<ClientePessoaFisica> listarPessoasFisicas();
 
     List<ClientePessoaJuridica> listarPessoasJuridicas();

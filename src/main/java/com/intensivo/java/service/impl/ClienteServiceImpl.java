@@ -14,8 +14,8 @@ import com.intensivo.java.repository.ClienteRepository;
 import com.intensivo.java.repository.ContaRepository;
 import com.intensivo.java.service.CepLookupService;
 import com.intensivo.java.service.ClienteService;
-import com.intensivo.java.service.support.MaskingUtils;
-import com.intensivo.java.service.support.TextUtils;
+import com.intensivo.java.util.MaskingUtils;
+import com.intensivo.java.util.TextUtils;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +37,13 @@ public class ClienteServiceImpl implements ClienteService {
     @Transactional(readOnly = true)
     public List<Cliente> listarTodos() {
         return clienteRepository.findAllByOrderByIdDesc();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Cliente buscar(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente nao encontrado."));
     }
 
     @Override
@@ -116,8 +123,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     @Transactional
     public void excluir(Long id) {
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente nao encontrado."));
+        Cliente cliente = buscar(id);
         if (contaRepository.existsByClienteId(id)) {
             throw new EntityInUseException("Nao e possivel excluir um cliente com contas vinculadas.");
         }
