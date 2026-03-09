@@ -6,8 +6,8 @@
 <main class="container py-4">
     <section class="page-header mb-4">
         <div>
-            <span class="hero-badge">Cadastro PJ</span>
-            <h1 class="display-title mt-2 mb-0" th:text="${tituloFormulario}">Novo Cliente PJ</h1>
+            <span class="hero-badge">Cadastro de cliente</span>
+            <h1 class="display-title mt-2 mb-0" th:text="${tituloFormulario}">Novo Cliente</h1>
         </div>
     </section>
 
@@ -22,27 +22,30 @@
             <div th:each="error : ${#fields.globalErrors()}" th:text="${error}"></div>
         </div>
         <div class="row g-3">
-            <div class="col-md-6">
-                <label class="form-label" for="razaoSocial">Razão social</label>
-                <input id="razaoSocial" th:field="*{razaoSocial}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{razaoSocial}"></div>
+            <div class="col-md-3">
+                <label class="form-label" for="tipoCliente">Tipo</label>
+                <select id="tipoCliente" th:field="*{tipoCliente}" class="form-select">
+                    <option value="">Selecione</option>
+                    <option th:each="tipo : ${tipoClientes}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
+                </select>
+                <div class="invalid-feedback d-block" th:errors="*{tipoCliente}"></div>
             </div>
-            <div class="col-md-6">
-                <label class="form-label" for="nomeFantasia">Nome fantasia</label>
-                <input id="nomeFantasia" th:field="*{nomeFantasia}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{nomeFantasia}"></div>
-            </div>
-            <div class="col-md-4">
-                <label class="form-label" for="cnpj">CNPJ</label>
-                <input id="cnpj" th:field="*{cnpj}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{cnpj}"></div>
+            <div class="col-md-5">
+                <label class="form-label" for="nome">Nome / Razão social</label>
+                <input id="nome" th:field="*{nome}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{nome}"></div>
             </div>
             <div class="col-md-4">
+                <label class="form-label" for="documento">CPF / CNPJ</label>
+                <input id="documento" th:field="*{documento}" class="form-control">
+                <div class="invalid-feedback d-block" th:errors="*{documento}"></div>
+            </div>
+            <div class="col-md-6">
                 <label class="form-label" for="email">Email</label>
                 <input id="email" th:field="*{email}" class="form-control">
                 <div class="invalid-feedback d-block" th:errors="*{email}"></div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label class="form-label" for="telefone">Telefone</label>
                 <input id="telefone" th:field="*{telefone}" class="form-control">
                 <div class="invalid-feedback d-block" th:errors="*{telefone}"></div>
@@ -58,7 +61,7 @@
                 <input id="logradouro" th:field="*{logradouro}" class="form-control" data-cep-target="logradouro" readonly>
             </div>
             <div class="col-md-3">
-                <label class="form-label" for="numero">Número</label>
+                <label class="form-label" for="numero">Numero</label>
                 <input id="numero" th:field="*{numero}" class="form-control">
                 <div class="invalid-feedback d-block" th:errors="*{numero}"></div>
             </div>
@@ -81,7 +84,7 @@
         </div>
         <div class="d-flex gap-2 justify-content-end mt-4">
             <a class="btn btn-outline-dark" th:href="@{/clientes}">Cancelar</a>
-            <button class="btn btn-app" type="submit">Salvar cliente PJ</button>
+            <button class="btn btn-app" type="submit">Salvar cliente</button>
         </div>
     </form>
 </main>

@@ -1,11 +1,11 @@
 package com.intensivo.java.controller;
 
-import com.intensivo.java.model.ContaCorrente;
-import com.intensivo.java.model.ContaJuridica;
-import com.intensivo.java.model.ContaStatus;
 import com.intensivo.java.dto.form.ContaCorrenteForm;
 import com.intensivo.java.dto.form.ContaJuridicaForm;
 import com.intensivo.java.exception.BusinessException;
+import com.intensivo.java.model.ContaCorrente;
+import com.intensivo.java.model.ContaJuridica;
+import com.intensivo.java.model.ContaStatus;
 import com.intensivo.java.service.ContaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -156,6 +156,7 @@ public class ContaController {
         model.addAttribute("modoEdicao", edicao);
         model.addAttribute("submitPath", edicao ? "/contas/corrente/" + form.getId() : "/contas/corrente");
         model.addAttribute("tituloFormulario", edicao ? "Editar Conta Corrente" : "Nova Conta Corrente");
+        model.addAttribute("tipoContaLabel", "Conta Corrente");
         model.addAttribute("clientes", contaService.listarClientesCorrente());
         model.addAttribute("statusList", ContaStatus.values());
     }
@@ -165,6 +166,7 @@ public class ContaController {
         model.addAttribute("modoEdicao", edicao);
         model.addAttribute("submitPath", edicao ? "/contas/juridica/" + form.getId() : "/contas/juridica");
         model.addAttribute("tituloFormulario", edicao ? "Editar Conta Juridica" : "Nova Conta Juridica");
+        model.addAttribute("tipoContaLabel", "Conta Juridica");
         model.addAttribute("clientes", contaService.listarClientesJuridicos());
         model.addAttribute("statusList", ContaStatus.values());
     }

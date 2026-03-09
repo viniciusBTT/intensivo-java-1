@@ -22,13 +22,13 @@ public class ContaJuridica extends Conta {
     private String responsavelFinanceiro;
 
     @Override
-    public boolean aceitaCliente(Cliente cliente) {
-        return cliente instanceof ClientePessoaJuridica;
+    public BigDecimal calcularTarifaMensal() {
+        return taxaPacoteMensal;
     }
 
     @Override
-    public BigDecimal calcularTarifaMensal() {
-        return taxaPacoteMensal;
+    public boolean aceitaTipoCliente(TipoCliente tipoCliente) {
+        return tipoCliente == TipoCliente.PJ;
     }
 
     @Override

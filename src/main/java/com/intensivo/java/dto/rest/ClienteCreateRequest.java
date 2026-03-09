@@ -1,5 +1,6 @@
 package com.intensivo.java.dto.rest;
 
+import com.intensivo.java.model.TipoCliente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +13,13 @@ import lombok.Setter;
 public class ClienteCreateRequest {
 
     @NotNull(message = "Informe o tipo do cliente.")
-    private ClienteRestType tipo;
+    private TipoCliente tipo;
+
+    @NotBlank(message = "Informe o nome do cliente.")
+    private String nome;
+
+    @NotBlank(message = "Informe o documento.")
+    private String documento;
 
     @NotBlank(message = "Informe um email.")
     @Email(message = "Informe um email valido.")
@@ -29,14 +36,4 @@ public class ClienteCreateRequest {
     private String numero;
 
     private String complemento;
-
-    private String nomeCompleto;
-
-    private String cpf;
-
-    private String razaoSocial;
-
-    private String nomeFantasia;
-
-    private String cnpj;
 }

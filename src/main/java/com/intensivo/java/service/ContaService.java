@@ -1,12 +1,11 @@
 package com.intensivo.java.service;
 
-import com.intensivo.java.model.ClientePessoaFisica;
-import com.intensivo.java.model.ClientePessoaJuridica;
+import com.intensivo.java.dto.form.ContaCorrenteForm;
+import com.intensivo.java.dto.form.ContaJuridicaForm;
+import com.intensivo.java.model.Cliente;
 import com.intensivo.java.model.Conta;
 import com.intensivo.java.model.ContaCorrente;
 import com.intensivo.java.model.ContaJuridica;
-import com.intensivo.java.dto.form.ContaCorrenteForm;
-import com.intensivo.java.dto.form.ContaJuridicaForm;
 import java.util.List;
 
 public interface ContaService {
@@ -15,9 +14,9 @@ public interface ContaService {
 
     Conta buscar(Long id);
 
-    List<ClientePessoaFisica> listarClientesCorrente();
+    List<Cliente> listarClientesCorrente();
 
-    List<ClientePessoaJuridica> listarClientesJuridicos();
+    List<Cliente> listarClientesJuridicos();
 
     ContaCorrente buscarContaCorrente(Long id);
 

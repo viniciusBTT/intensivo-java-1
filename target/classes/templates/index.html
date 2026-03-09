@@ -11,7 +11,7 @@
             <p class="text-secondary mb-0">Usuário autenticado: <strong th:text="${usuarioLogado}">admin</strong></p>
         </div>
         <div class="hero-actions">
-            <a class="btn btn-app" th:href="@{/clientes/pf/novo}">Novo cliente PF</a>
+            <a class="btn btn-app" th:href="@{/clientes/novo}">Novo cliente</a>
             <a class="btn btn-outline-dark" th:href="@{/contas/corrente/novo}">Nova conta corrente</a>
         </div>
     </section>
@@ -41,8 +41,7 @@
                 <div class="card-body">
                     <h2 class="section-title">Fluxos rápidos</h2>
                     <div class="d-grid gap-2">
-                        <a class="btn btn-outline-dark" th:href="@{/clientes/pf/novo}">Cadastrar cliente pessoa física</a>
-                        <a class="btn btn-outline-dark" th:href="@{/clientes/pj/novo}">Cadastrar cliente pessoa jurídica</a>
+                        <a class="btn btn-outline-dark" th:href="@{/clientes/novo}">Cadastrar cliente</a>
                         <a class="btn btn-outline-dark" th:href="@{/contas/corrente/novo}">Abrir conta corrente</a>
                         <a class="btn btn-outline-dark" th:href="@{/contas/juridica/novo}">Abrir conta jurídica</a>
                     </div>

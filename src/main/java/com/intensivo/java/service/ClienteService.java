@@ -1,10 +1,7 @@
 package com.intensivo.java.service;
 
 import com.intensivo.java.model.Cliente;
-import com.intensivo.java.model.ClientePessoaFisica;
-import com.intensivo.java.model.ClientePessoaJuridica;
-import com.intensivo.java.dto.form.ClientePessoaFisicaForm;
-import com.intensivo.java.dto.form.ClientePessoaJuridicaForm;
+import com.intensivo.java.dto.form.ClienteForm;
 import java.util.List;
 
 public interface ClienteService {
@@ -13,21 +10,9 @@ public interface ClienteService {
 
     Cliente buscar(Long id);
 
-    List<ClientePessoaFisica> listarPessoasFisicas();
+    Cliente criar(ClienteForm form);
 
-    List<ClientePessoaJuridica> listarPessoasJuridicas();
-
-    ClientePessoaFisica buscarPessoaFisica(Long id);
-
-    ClientePessoaJuridica buscarPessoaJuridica(Long id);
-
-    Cliente criarPessoaFisica(ClientePessoaFisicaForm form);
-
-    Cliente atualizarPessoaFisica(Long id, ClientePessoaFisicaForm form);
-
-    Cliente criarPessoaJuridica(ClientePessoaJuridicaForm form);
-
-    Cliente atualizarPessoaJuridica(Long id, ClientePessoaJuridicaForm form);
+    Cliente atualizar(Long id, ClienteForm form);
 
     void excluir(Long id);
 

@@ -21,13 +21,13 @@ public class ContaCorrente extends Conta {
     private BigDecimal limiteChequeEspecial;
 
     @Override
-    public boolean aceitaCliente(Cliente cliente) {
-        return cliente instanceof ClientePessoaFisica;
+    public BigDecimal calcularTarifaMensal() {
+        return TARIFA_PADRAO;
     }
 
     @Override
-    public BigDecimal calcularTarifaMensal() {
-        return TARIFA_PADRAO;
+    public boolean aceitaTipoCliente(TipoCliente tipoCliente) {
+        return tipoCliente == TipoCliente.PF;
     }
 
     @Override

@@ -40,10 +40,7 @@ public class ClienteRestController {
 
     @PostMapping
     public ResponseEntity<ClienteResponse> criar(@Valid @RequestBody ClienteCreateRequest request) {
-        Cliente cliente = switch (request.getTipo()) {
-            case PF -> clienteService.criarPessoaFisica(restPayloadMapper.toPessoaFisicaForm(request));
-            case PJ -> clienteService.criarPessoaJuridica(restPayloadMapper.toPessoaJuridicaForm(request));
-        };
+        Cliente cliente = clienteService.criar(restPayloadMapper.toClienteForm(request));
 
         ClienteResponse response = restPayloadMapper.toClienteResponse(cliente);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()

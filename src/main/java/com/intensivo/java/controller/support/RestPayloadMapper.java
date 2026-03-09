@@ -1,20 +1,16 @@
 package com.intensivo.java.controller.support;
 
-import com.intensivo.java.dto.form.ClientePessoaFisicaForm;
-import com.intensivo.java.dto.form.ClientePessoaJuridicaForm;
+import com.intensivo.java.dto.form.ClienteForm;
 import com.intensivo.java.dto.form.ContaCorrenteForm;
 import com.intensivo.java.dto.form.ContaJuridicaForm;
 import com.intensivo.java.dto.rest.ClienteCreateRequest;
 import com.intensivo.java.dto.rest.ClienteResponse;
-import com.intensivo.java.dto.rest.ClienteRestType;
 import com.intensivo.java.dto.rest.ContaCreateRequest;
 import com.intensivo.java.dto.rest.ContaResponse;
 import com.intensivo.java.dto.rest.ContaRestType;
 import com.intensivo.java.dto.rest.EnderecoResponse;
 import com.intensivo.java.exception.RestValidationException;
 import com.intensivo.java.model.Cliente;
-import com.intensivo.java.model.ClientePessoaFisica;
-import com.intensivo.java.model.ClientePessoaJuridica;
 import com.intensivo.java.model.Conta;
 import com.intensivo.java.model.ContaCorrente;
 import com.intensivo.java.model.ContaJuridica;
@@ -33,21 +29,9 @@ public class RestPayloadMapper {
 
     private final Validator validator;
 
-    public ClientePessoaFisicaForm toPessoaFisicaForm(ClienteCreateRequest request) {
-        ClientePessoaFisicaForm form = new ClientePessoaFisicaForm();
+    public ClienteForm toClienteForm(ClienteCreateRequest request) {
+        ClienteForm form = new ClienteForm();
         preencherClienteComum(form, request);
-        form.setNomeCompleto(request.getNomeCompleto());
-        form.setCpf(request.getCpf());
-        validate(form);
-        return form;
-    }
-
-    public ClientePessoaJuridicaForm toPessoaJuridicaForm(ClienteCreateRequest request) {
-        ClientePessoaJuridicaForm form = new ClientePessoaJuridicaForm();
-        preencherClienteComum(form, request);
-        form.setRazaoSocial(request.getRazaoSocial());
-        form.setNomeFantasia(request.getNomeFantasia());
-        form.setCnpj(request.getCnpj());
         validate(form);
         return form;
     }
@@ -70,39 +54,14 @@ public class RestPayloadMapper {
     }
 
     public ClienteResponse toClienteResponse(Cliente cliente) {
-        if (cliente instanceof ClientePessoaFisica pessoaFisica) {
-            return new ClienteResponse(
-                    pessoaFisica.getId(),
-                    ClienteRestType.PF,
-                    pessoaFisica.getNomeExibicao(),
-                    pessoaFisica.getDocumento(),
-                    pessoaFisica.getEmail(),
-                    pessoaFisica.getTelefone(),
-                    toEnderecoResponse(pessoaFisica.getEndereco()),
-                    pessoaFisica.getNomeCompleto(),
-                    pessoaFisica.getCpf(),
-                    null,
-                    null,
-                    null);
-        }
-
-        if (cliente instanceof ClientePessoaJuridica pessoaJuridica) {
-            return new ClienteResponse(
-                    pessoaJuridica.getId(),
-                    ClienteRestType.PJ,
-                    pessoaJuridica.getNomeExibicao(),
-                    pessoaJuridica.getDocumento(),
-                    pessoaJuridica.getEmail(),
-                    pessoaJuridica.getTelefone(),
-                    toEnderecoResponse(pessoaJuridica.getEndereco()),
-                    null,
-                    null,
-                    pessoaJuridica.getRazaoSocial(),
-                    pessoaJuridica.getNomeFantasia(),
-                    pessoaJuridica.getCnpj());
-        }
-
-        throw new IllegalArgumentException("Tipo de cliente nao suportado.");
+        return new ClienteResponse(
+                cliente.getId(),
+                cliente.getTipoCliente(),
+                cliente.getNome(),
+                cliente.getDocumento(),
+                cliente.getEmail(),
+                cliente.getTelefone(),
+                toEnderecoResponse(cliente.getEndereco()));
     }
 
     public ContaResponse toContaResponse(Conta conta) {
@@ -116,7 +75,7 @@ public class RestPayloadMapper {
                     contaCorrente.getSaldoInicial(),
                     contaCorrente.calcularTarifaMensal(),
                     contaCorrente.getCliente().getId(),
-                    contaCorrente.getCliente().getNomeExibicao(),
+                    contaCorrente.getCliente().getNome(),
                     contaCorrente.getLimiteChequeEspecial(),
                     null,
                     null);
@@ -132,7 +91,7 @@ public class RestPayloadMapper {
                     contaJuridica.getSaldoInicial(),
                     contaJuridica.calcularTarifaMensal(),
                     contaJuridica.getCliente().getId(),
-                    contaJuridica.getCliente().getNomeExibicao(),
+                    contaJuridica.getCliente().getNome(),
                     null,
                     contaJuridica.getTaxaPacoteMensal(),
                     contaJuridica.getResponsavelFinanceiro());
@@ -141,7 +100,10 @@ public class RestPayloadMapper {
         throw new IllegalArgumentException("Tipo de conta nao suportado.");
     }
 
-    private void preencherClienteComum(com.intensivo.java.dto.form.ClienteForm form, ClienteCreateRequest request) {
+    private void preencherClienteComum(ClienteForm form, ClienteCreateRequest request) {
+        form.setTipoCliente(request.getTipo());
+        form.setNome(request.getNome());
+        form.setDocumento(request.getDocumento());
         form.setEmail(request.getEmail());
         form.setTelefone(request.getTelefone());
         form.setCep(request.getCep());

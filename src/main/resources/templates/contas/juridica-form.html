@@ -22,7 +22,7 @@
                 <label class="form-label" for="clienteId">Cliente PJ</label>
                 <select id="clienteId" th:field="*{clienteId}" class="form-select">
                     <option value="">Selecione</option>
-                    <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nomeFantasia + ' - CNPJ ' + cliente.cnpj}"></option>
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome + ' - CNPJ ' + cliente.documento}"></option>
                 </select>
                 <div class="invalid-feedback d-block" th:errors="*{clienteId}"></div>
             </div>

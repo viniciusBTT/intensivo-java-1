@@ -7,11 +7,10 @@
     <section class="page-header mb-4">
         <div>
             <span class="hero-badge">Carteira de clientes</span>
-            <h1 class="display-title mt-2 mb-0">Clientes PF e PJ</h1>
+            <h1 class="display-title mt-2 mb-0">Clientes cadastrados</h1>
         </div>
         <div class="d-flex gap-2 flex-wrap">
-            <a class="btn btn-app" th:href="@{/clientes/pf/novo}">Novo PF</a>
-            <a class="btn btn-outline-dark" th:href="@{/clientes/pj/novo}">Novo PJ</a>
+            <a class="btn btn-app" th:href="@{/clientes/novo}">Novo cliente</a>
         </div>
     </section>
 
@@ -39,8 +38,8 @@
                     </tr>
                     <tr th:each="cliente : ${clientes}">
                         <td th:text="${cliente.id}">1</td>
-                        <td><span class="badge text-bg-light" th:text="${cliente.tipoCliente}">PF</span></td>
-                        <td th:text="${cliente.nomeExibicao}">Nome</td>
+                        <td><span class="badge text-bg-light" th:text="${cliente.tipoClienteDescricao}">PF</span></td>
+                        <td th:text="${cliente.nome}">Nome</td>
                         <td th:text="${cliente.documento}">000</td>
                         <td th:text="${cliente.email}">mail</td>
                         <td th:text="${cliente.telefone}">11999999999</td>
@@ -48,11 +47,7 @@
                         <td class="text-end">
                             <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
                                 <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${cliente.tipoCliente == 'Pessoa Fisica'}"
-                                   th:href="@{'/clientes/pf/' + ${cliente.id} + '/editar'}">Editar</a>
-                                <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${cliente.tipoCliente == 'Pessoa Juridica'}"
-                                   th:href="@{'/clientes/pj/' + ${cliente.id} + '/editar'}">Editar</a>
+                                   th:href="@{'/clientes/' + ${cliente.id} + '/editar'}">Editar</a>
                                 <form th:action="@{'/clientes/' + ${cliente.id} + '/excluir'}"
                                       method="post"
                                       class="d-inline"

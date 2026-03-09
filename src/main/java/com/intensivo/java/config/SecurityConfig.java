@@ -13,22 +13,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final RequestContextLoggingFilter requestContextLoggingFilter;
-
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
-                http.authorizeHttpRequests(authorize -> authorize
+        http.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/login", "/css/**", "/js/**", "/error").permitAll()
                         .requestMatchers(HttpMethod.POST, "/clientes/*/excluir", "/contas/*/excluir").hasRole("ADMIN")
-                        .requestMatchers("/clientes/**", "/contas/**", "/api/ceps/**", "/api/clientes/**", "/api/contas/**", "/")
-                        .hasAnyRole("ADMIN", "ATENDENTE")
+                        .requestMatchers("/", "/clientes/**", "/contas/**", "/api/**").hasAnyRole("ADMIN", "ATENDENTE")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -36,7 +32,6 @@ public class SecurityConfig {
                         .permitAll())
                 .logout(logout -> logout.logoutSuccessUrl("/login?logout"))
                 .authenticationProvider(authenticationProvider(userDetailsService))
-                .addFilterAfter(requestContextLoggingFilter, AnonymousAuthenticationFilter.class)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .rememberMe(AbstractHttpConfigurer::disable)
                 .csrf(Customizer.withDefaults());

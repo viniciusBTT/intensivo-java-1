@@ -1,16 +1,11 @@
 com/intensivo/java/config/CepProperties.class
 com/intensivo/java/dto/form/ContaCorrenteForm.class
 com/intensivo/java/exception/ResourceNotFoundException.class
-com/intensivo/java/config/RequestContextLoggingFilter.class
 com/intensivo/java/exception/ContaClienteIncompativelException.class
-com/intensivo/java/controller/ClienteRestController$1.class
 com/intensivo/java/controller/CepRestController.class
 com/intensivo/java/controller/ContaController.class
-com/intensivo/java/model/ClientePessoaFisica.class
-com/intensivo/java/repository/ClientePessoaFisicaRepository.class
 com/intensivo/java/model/Endereco$EnderecoBuilder.class
 com/intensivo/java/model/ContaJuridica.class
-com/intensivo/java/config/BootstrapDataRunner.class
 com/intensivo/java/exception/DuplicateDocumentException.class
 com/intensivo/java/repository/ContaRepository.class
 com/intensivo/java/model/BaseEntity.class
@@ -27,11 +22,8 @@ com/intensivo/java/model/ContaCorrente.class
 com/intensivo/java/repository/ClienteRepository.class
 com/intensivo/java/dto/form/ContaForm.class
 com/intensivo/java/exception/MvcExceptionHandler.class
-com/intensivo/java/repository/ClientePessoaJuridicaRepository.class
-com/intensivo/java/model/ClientePessoaJuridica.class
 com/intensivo/java/config/SecurityConfig.class
 com/intensivo/java/service/CepLookupService.class
-com/intensivo/java/dto/form/ClientePessoaJuridicaForm.class
 com/intensivo/java/model/Role.class
 com/intensivo/java/controller/HomeController.class
 com/intensivo/java/JavaApplication.class
@@ -48,7 +40,6 @@ com/intensivo/java/model/Usuario.class
 com/intensivo/java/model/Endereco.class
 com/intensivo/java/dto/rest/RestErrorResponse.class
 com/intensivo/java/controller/ClienteController.class
-com/intensivo/java/dto/form/ClientePessoaFisicaForm.class
 com/intensivo/java/exception/EntityInUseException.class
 com/intensivo/java/integration/ViaCepClient.class
 com/intensivo/java/util/MaskingUtils.class

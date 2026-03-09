@@ -40,9 +40,9 @@ public abstract class Conta extends BaseEntity {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    public abstract boolean aceitaCliente(Cliente cliente);
-
     public abstract BigDecimal calcularTarifaMensal();
+
+    public abstract boolean aceitaTipoCliente(TipoCliente tipoCliente);
 
     public abstract String getTipoConta();
 }

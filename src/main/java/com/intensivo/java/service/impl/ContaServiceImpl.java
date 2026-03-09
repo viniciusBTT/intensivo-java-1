@@ -1,18 +1,15 @@
 package com.intensivo.java.service.impl;
 
 import com.intensivo.java.model.Cliente;
-import com.intensivo.java.model.ClientePessoaFisica;
-import com.intensivo.java.model.ClientePessoaJuridica;
 import com.intensivo.java.model.Conta;
 import com.intensivo.java.model.ContaCorrente;
 import com.intensivo.java.model.ContaJuridica;
+import com.intensivo.java.model.TipoCliente;
 import com.intensivo.java.dto.form.ContaCorrenteForm;
 import com.intensivo.java.dto.form.ContaJuridicaForm;
 import com.intensivo.java.exception.ContaClienteIncompativelException;
 import com.intensivo.java.exception.ResourceNotFoundException;
 import com.intensivo.java.repository.ClienteRepository;
-import com.intensivo.java.repository.ClientePessoaFisicaRepository;
-import com.intensivo.java.repository.ClientePessoaJuridicaRepository;
 import com.intensivo.java.repository.ContaRepository;
 import com.intensivo.java.service.ContaService;
 import com.intensivo.java.util.TextUtils;
@@ -34,8 +31,6 @@ public class ContaServiceImpl implements ContaService {
 
     private final ContaRepository contaRepository;
     private final ClienteRepository clienteRepository;
-    private final ClientePessoaFisicaRepository clientePessoaFisicaRepository;
-    private final ClientePessoaJuridicaRepository clientePessoaJuridicaRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -52,14 +47,14 @@ public class ContaServiceImpl implements ContaService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ClientePessoaFisica> listarClientesCorrente() {
-        return clientePessoaFisicaRepository.findAllByOrderByNomeCompletoAsc();
+    public List<Cliente> listarClientesCorrente() {
+        return clienteRepository.findAllByTipoClienteOrderByNomeAsc(TipoCliente.PF);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ClientePessoaJuridica> listarClientesJuridicos() {
-        return clientePessoaJuridicaRepository.findAllByOrderByNomeFantasiaAsc();
+    public List<Cliente> listarClientesJuridicos() {
+        return clienteRepository.findAllByTipoClienteOrderByNomeAsc(TipoCliente.PJ);
     }
 
     @Override
@@ -160,7 +155,7 @@ public class ContaServiceImpl implements ContaService {
     }
 
     private void validarTipoCliente(Conta conta, Cliente cliente) {
-        if (!conta.aceitaCliente(cliente)) {
+        if (!conta.aceitaTipoCliente(cliente.getTipoCliente())) {
             throw new ContaClienteIncompativelException("O tipo de cliente nao e compativel com a conta selecionada.");
         }
     }

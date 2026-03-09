@@ -41,7 +41,7 @@
                         <td th:text="${conta.numero}">00000001</td>
                         <td th:text="${conta.agencia}">0001</td>
                         <td th:text="${conta.tipoConta}">Conta Corrente</td>
-                        <td th:text="${conta.cliente.nomeExibicao}">Titular</td>
+                        <td th:text="${conta.cliente.nome}">Titular</td>
                         <td><span class="badge text-bg-light" th:text="${conta.status}">ATIVA</span></td>
                         <td th:text="${#numbers.formatDecimal(conta.saldoInicial, 1, 'POINT', 2, 'COMMA')}">0,00</td>
                         <td th:text="${#numbers.formatDecimal(conta.calcularTarifaMensal(), 1, 'POINT', 2, 'COMMA')}">0,00</td>

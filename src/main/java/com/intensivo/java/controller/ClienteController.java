@@ -1,10 +1,9 @@
 package com.intensivo.java.controller;
 
-import com.intensivo.java.model.ClientePessoaFisica;
-import com.intensivo.java.model.ClientePessoaJuridica;
-import com.intensivo.java.dto.form.ClientePessoaFisicaForm;
-import com.intensivo.java.dto.form.ClientePessoaJuridicaForm;
+import com.intensivo.java.dto.form.ClienteForm;
 import com.intensivo.java.exception.BusinessException;
+import com.intensivo.java.model.Cliente;
+import com.intensivo.java.model.TipoCliente;
 import com.intensivo.java.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,115 +29,59 @@ public class ClienteController {
         return "clientes/list";
     }
 
-    @GetMapping("/clientes/pf/novo")
-    public String novoPf(Model model) {
-        prepararFormularioPf(model, new ClientePessoaFisicaForm(), false);
-        return "clientes/pf-form";
+    @GetMapping("/clientes/novo")
+    public String novo(Model model) {
+        prepararFormulario(model, new ClienteForm(), false);
+        return "clientes/form";
     }
 
-    @PostMapping("/clientes/pf")
-    public String criarPf(@Valid @ModelAttribute("form") ClientePessoaFisicaForm form,
+    @PostMapping("/clientes")
+    public String criar(@Valid @ModelAttribute("form") ClienteForm form,
             BindingResult bindingResult,
             Model model,
             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            prepararFormularioPf(model, form, false);
-            return "clientes/pf-form";
+            prepararFormulario(model, form, false);
+            return "clientes/form";
         }
 
         try {
-            clienteService.criarPessoaFisica(form);
-            redirectAttributes.addFlashAttribute("successMessage", "Cliente PF cadastrado com sucesso.");
+            clienteService.criar(form);
+            redirectAttributes.addFlashAttribute("successMessage", "Cliente cadastrado com sucesso.");
             return "redirect:/clientes";
         } catch (BusinessException exception) {
             bindingResult.reject("business", exception.getMessage());
-            prepararFormularioPf(model, form, false);
-            return "clientes/pf-form";
+            prepararFormulario(model, form, false);
+            return "clientes/form";
         }
     }
 
-    @GetMapping("/clientes/pf/{id}/editar")
-    public String editarPf(@PathVariable Long id, Model model) {
-        ClientePessoaFisica cliente = clienteService.buscarPessoaFisica(id);
-        prepararFormularioPf(model, toPfForm(cliente), true);
-        return "clientes/pf-form";
+    @GetMapping("/clientes/{id}/editar")
+    public String editar(@PathVariable Long id, Model model) {
+        Cliente cliente = clienteService.buscar(id);
+        prepararFormulario(model, toForm(cliente), true);
+        return "clientes/form";
     }
 
-    @PostMapping("/clientes/pf/{id}")
-    public String atualizarPf(@PathVariable Long id,
-            @Valid @ModelAttribute("form") ClientePessoaFisicaForm form,
+    @PostMapping("/clientes/{id}")
+    public String atualizar(@PathVariable Long id,
+            @Valid @ModelAttribute("form") ClienteForm form,
             BindingResult bindingResult,
             Model model,
             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            prepararFormularioPf(model, form, true);
-            return "clientes/pf-form";
+            prepararFormulario(model, form, true);
+            return "clientes/form";
         }
 
         try {
-            clienteService.atualizarPessoaFisica(id, form);
-            redirectAttributes.addFlashAttribute("successMessage", "Cliente PF atualizado com sucesso.");
+            clienteService.atualizar(id, form);
+            redirectAttributes.addFlashAttribute("successMessage", "Cliente atualizado com sucesso.");
             return "redirect:/clientes";
         } catch (BusinessException exception) {
             bindingResult.reject("business", exception.getMessage());
-            prepararFormularioPf(model, form, true);
-            return "clientes/pf-form";
-        }
-    }
-
-    @GetMapping("/clientes/pj/novo")
-    public String novoPj(Model model) {
-        prepararFormularioPj(model, new ClientePessoaJuridicaForm(), false);
-        return "clientes/pj-form";
-    }
-
-    @PostMapping("/clientes/pj")
-    public String criarPj(@Valid @ModelAttribute("form") ClientePessoaJuridicaForm form,
-            BindingResult bindingResult,
-            Model model,
-            RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            prepararFormularioPj(model, form, false);
-            return "clientes/pj-form";
-        }
-
-        try {
-            clienteService.criarPessoaJuridica(form);
-            redirectAttributes.addFlashAttribute("successMessage", "Cliente PJ cadastrado com sucesso.");
-            return "redirect:/clientes";
-        } catch (BusinessException exception) {
-            bindingResult.reject("business", exception.getMessage());
-            prepararFormularioPj(model, form, false);
-            return "clientes/pj-form";
-        }
-    }
-
-    @GetMapping("/clientes/pj/{id}/editar")
-    public String editarPj(@PathVariable Long id, Model model) {
-        ClientePessoaJuridica cliente = clienteService.buscarPessoaJuridica(id);
-        prepararFormularioPj(model, toPjForm(cliente), true);
-        return "clientes/pj-form";
-    }
-
-    @PostMapping("/clientes/pj/{id}")
-    public String atualizarPj(@PathVariable Long id,
-            @Valid @ModelAttribute("form") ClientePessoaJuridicaForm form,
-            BindingResult bindingResult,
-            Model model,
-            RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            prepararFormularioPj(model, form, true);
-            return "clientes/pj-form";
-        }
-
-        try {
-            clienteService.atualizarPessoaJuridica(id, form);
-            redirectAttributes.addFlashAttribute("successMessage", "Cliente PJ atualizado com sucesso.");
-            return "redirect:/clientes";
-        } catch (BusinessException exception) {
-            bindingResult.reject("business", exception.getMessage());
-            prepararFormularioPj(model, form, true);
-            return "clientes/pj-form";
+            prepararFormulario(model, form, true);
+            return "clientes/form";
         }
     }
 
@@ -150,41 +93,25 @@ public class ClienteController {
         return "redirect:/clientes";
     }
 
-    private void prepararFormularioPf(Model model, ClientePessoaFisicaForm form, boolean edicao) {
+    private void prepararFormulario(Model model, ClienteForm form, boolean edicao) {
         model.addAttribute("form", form);
         model.addAttribute("modoEdicao", edicao);
-        model.addAttribute("submitPath", edicao ? "/clientes/pf/" + form.getId() : "/clientes/pf");
-        model.addAttribute("tituloFormulario", edicao ? "Editar Cliente PF" : "Novo Cliente PF");
+        model.addAttribute("submitPath", edicao ? "/clientes/" + form.getId() : "/clientes");
+        model.addAttribute("tituloFormulario", edicao ? "Editar Cliente" : "Novo Cliente");
+        model.addAttribute("tipoClientes", TipoCliente.values());
     }
 
-    private void prepararFormularioPj(Model model, ClientePessoaJuridicaForm form, boolean edicao) {
-        model.addAttribute("form", form);
-        model.addAttribute("modoEdicao", edicao);
-        model.addAttribute("submitPath", edicao ? "/clientes/pj/" + form.getId() : "/clientes/pj");
-        model.addAttribute("tituloFormulario", edicao ? "Editar Cliente PJ" : "Novo Cliente PJ");
-    }
-
-    private ClientePessoaFisicaForm toPfForm(ClientePessoaFisica cliente) {
-        ClientePessoaFisicaForm form = new ClientePessoaFisicaForm();
+    private ClienteForm toForm(Cliente cliente) {
+        ClienteForm form = new ClienteForm();
         form.setId(cliente.getId());
-        form.setNomeCompleto(cliente.getNomeCompleto());
-        form.setCpf(cliente.getCpf());
+        form.setTipoCliente(cliente.getTipoCliente());
+        form.setNome(cliente.getNome());
+        form.setDocumento(cliente.getDocumento());
         preencherCamposComuns(form, cliente);
         return form;
     }
 
-    private ClientePessoaJuridicaForm toPjForm(ClientePessoaJuridica cliente) {
-        ClientePessoaJuridicaForm form = new ClientePessoaJuridicaForm();
-        form.setId(cliente.getId());
-        form.setRazaoSocial(cliente.getRazaoSocial());
-        form.setNomeFantasia(cliente.getNomeFantasia());
-        form.setCnpj(cliente.getCnpj());
-        preencherCamposComuns(form, cliente);
-        return form;
-    }
-
-    private void preencherCamposComuns(com.intensivo.java.dto.form.ClienteForm form,
-            com.intensivo.java.model.Cliente cliente) {
+    private void preencherCamposComuns(ClienteForm form, Cliente cliente) {
         form.setEmail(cliente.getEmail());
         form.setTelefone(cliente.getTelefone());
         form.setCep(cliente.getEndereco().getCep());
