@@ -1,7 +1,7 @@
 package com.intensivo.java.service;
 
-import com.intensivo.java.model.Endereco;
 import com.intensivo.java.dto.rest.CepResponse;
+import com.intensivo.java.model.clientes.Endereco;
 
 public interface CepLookupService {
 

@@ -1,21 +1,22 @@
 package com.intensivo.java.controller.support;
 
-import com.intensivo.java.dto.form.ClienteForm;
-import com.intensivo.java.dto.form.ContaCorrenteForm;
-import com.intensivo.java.dto.form.ContaJuridicaForm;
-import com.intensivo.java.dto.rest.ClienteCreateRequest;
-import com.intensivo.java.dto.rest.ClienteResponse;
-import com.intensivo.java.dto.rest.ContaCreateRequest;
-import com.intensivo.java.dto.rest.ContaResponse;
-import com.intensivo.java.dto.rest.ContaRestType;
-import com.intensivo.java.dto.rest.EnderecoResponse;
+import com.intensivo.java.dto.form.clientes.ClienteForm;
+import com.intensivo.java.dto.form.contas.ContaCorrenteForm;
+import com.intensivo.java.dto.form.contas.ContaForm;
+import com.intensivo.java.dto.form.contas.ContaJuridicaForm;
+import com.intensivo.java.dto.rest.clientes.ClienteCreateRequest;
+import com.intensivo.java.dto.rest.clientes.ClienteResponse;
+import com.intensivo.java.dto.rest.clientes.EnderecoResponse;
+import com.intensivo.java.dto.rest.contas.ContaCreateRequest;
+import com.intensivo.java.dto.rest.contas.ContaResponse;
+import com.intensivo.java.dto.rest.contas.ContaRestType;
 import com.intensivo.java.exception.RestValidationException;
-import com.intensivo.java.model.Cliente;
-import com.intensivo.java.model.Conta;
-import com.intensivo.java.model.ContaCorrente;
-import com.intensivo.java.model.ContaJuridica;
-import com.intensivo.java.model.ContaStatus;
-import com.intensivo.java.model.Endereco;
+import com.intensivo.java.model.clientes.Cliente;
+import com.intensivo.java.model.clientes.Endereco;
+import com.intensivo.java.model.contas.Conta;
+import com.intensivo.java.model.contas.ContaCorrente;
+import com.intensivo.java.model.contas.ContaJuridica;
+import com.intensivo.java.model.contas.ContaStatus;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import java.util.LinkedHashMap;
@@ -111,7 +112,7 @@ public class RestPayloadMapper {
         form.setComplemento(request.getComplemento());
     }
 
-    private void preencherContaComum(com.intensivo.java.dto.form.ContaForm form, ContaCreateRequest request) {
+    private void preencherContaComum(ContaForm form, ContaCreateRequest request) {
         form.setClienteId(request.getClienteId());
         form.setSaldoInicial(request.getSaldoInicial());
         form.setStatus(request.getStatus() == null ? ContaStatus.ATIVA : request.getStatus());

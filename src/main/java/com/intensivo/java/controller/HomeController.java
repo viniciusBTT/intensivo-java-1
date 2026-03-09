@@ -1,7 +1,7 @@
 package com.intensivo.java.controller;
 
-import com.intensivo.java.service.ClienteService;
-import com.intensivo.java.service.ContaService;
+import com.intensivo.java.service.clientes.ClienteService;
+import com.intensivo.java.service.contas.ContaService;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,15 +1,15 @@
 package com.intensivo.java.config;
 
-import com.intensivo.java.model.Cliente;
-import com.intensivo.java.model.ContaCorrente;
-import com.intensivo.java.model.ContaJuridica;
-import com.intensivo.java.model.ContaStatus;
-import com.intensivo.java.model.Endereco;
 import com.intensivo.java.model.Role;
-import com.intensivo.java.model.TipoCliente;
 import com.intensivo.java.model.Usuario;
-import com.intensivo.java.repository.ClienteRepository;
-import com.intensivo.java.repository.ContaRepository;
+import com.intensivo.java.model.clientes.Cliente;
+import com.intensivo.java.model.clientes.Endereco;
+import com.intensivo.java.model.clientes.TipoCliente;
+import com.intensivo.java.model.contas.ContaCorrente;
+import com.intensivo.java.model.contas.ContaJuridica;
+import com.intensivo.java.model.contas.ContaStatus;
+import com.intensivo.java.repository.clientes.ClienteRepository;
+import com.intensivo.java.repository.contas.ContaRepository;
 import com.intensivo.java.repository.UsuarioRepository;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -54,41 +54,45 @@ public class DataInitializer implements ApplicationRunner {
         }
 
         Cliente clientePf = new Cliente();
-        clientePf.setNome("Joao da Silva");
-        clientePf.setTipoCliente(TipoCliente.PF);
-        clientePf.setDocumento("12345678901");
-        clientePf.setEmail("joao@example.com");
-        clientePf.setTelefone("11999998888");
-        clientePf.setEndereco(endereco("01001000", "Praca da Se", "100", "Se", "Sao Paulo", "SP", "Casa"));
+        clientePf.atualizarCadastro(
+                TipoCliente.PF,
+                "Joao da Silva",
+                "12345678901",
+                "joao@example.com",
+                "11999998888",
+                endereco("01001000", "Praca da Se", "100", "Se", "Sao Paulo", "SP", "Casa"));
         clientePf = clienteRepository.save(clientePf);
 
         Cliente clientePj = new Cliente();
-        clientePj.setNome("XPTO LTDA");
-        clientePj.setTipoCliente(TipoCliente.PJ);
-        clientePj.setDocumento("12345678000199");
-        clientePj.setEmail("contato@xpto.com");
-        clientePj.setTelefone("1133334444");
-        clientePj.setEndereco(endereco("01310930", "Avenida Paulista", "900", "Bela Vista", "Sao Paulo", "SP", "Sala 12"));
+        clientePj.atualizarCadastro(
+                TipoCliente.PJ,
+                "XPTO LTDA",
+                "12345678000199",
+                "contato@xpto.com",
+                "1133334444",
+                endereco("01310930", "Avenida Paulista", "900", "Bela Vista", "Sao Paulo", "SP", "Sala 12"));
         clientePj = clienteRepository.save(clientePj);
 
         if (contaRepository.count() == 0) {
             ContaCorrente corrente = new ContaCorrente();
-            corrente.setAgencia("0001");
-            corrente.setNumero("00000001");
-            corrente.setSaldoInicial(new BigDecimal("1500.00"));
-            corrente.setStatus(ContaStatus.ATIVA);
-            corrente.setLimiteChequeEspecial(new BigDecimal("500.00"));
-            corrente.setCliente(clientePf);
+            corrente.abrirConta(
+                    "0001",
+                    "00000001",
+                    clientePf,
+                    new BigDecimal("1500.00"),
+                    ContaStatus.ATIVA,
+                    new BigDecimal("500.00"));
             contaRepository.save(corrente);
 
             ContaJuridica juridica = new ContaJuridica();
-            juridica.setAgencia("0001");
-            juridica.setNumero("00000002");
-            juridica.setSaldoInicial(new BigDecimal("5000.00"));
-            juridica.setStatus(ContaStatus.ATIVA);
-            juridica.setTaxaPacoteMensal(new BigDecimal("89.90"));
-            juridica.setResponsavelFinanceiro("Ana Financeira");
-            juridica.setCliente(clientePj);
+            juridica.abrirConta(
+                    "0001",
+                    "00000002",
+                    clientePj,
+                    new BigDecimal("5000.00"),
+                    ContaStatus.ATIVA,
+                    new BigDecimal("89.90"),
+                    "Ana Financeira");
             contaRepository.save(juridica);
         }
 

@@ -1,8 +1,8 @@
 package com.intensivo.java.exception;
 
-import com.intensivo.java.controller.ClienteController;
-import com.intensivo.java.controller.ContaController;
 import com.intensivo.java.controller.HomeController;
+import com.intensivo.java.controller.clientes.ClienteController;
+import com.intensivo.java.controller.contas.ContaController;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

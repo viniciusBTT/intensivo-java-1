@@ -1,8 +1,8 @@
 package com.intensivo.java.exception;
 
 import com.intensivo.java.controller.CepRestController;
-import com.intensivo.java.controller.ClienteRestController;
-import com.intensivo.java.controller.ContaRestController;
+import com.intensivo.java.controller.clientes.ClienteRestController;
+import com.intensivo.java.controller.contas.ContaRestController;
 import com.intensivo.java.dto.rest.RestErrorResponse;
 import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;

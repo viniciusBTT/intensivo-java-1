@@ -1,8 +1,8 @@
 package com.intensivo.java.service.impl;
 
-import com.intensivo.java.model.Endereco;
 import com.intensivo.java.dto.rest.CepResponse;
 import com.intensivo.java.integration.ViaCepClient;
+import com.intensivo.java.model.clientes.Endereco;
 import com.intensivo.java.service.CepLookupService;
 import com.intensivo.java.util.TextUtils;
 import lombok.RequiredArgsConstructor;
