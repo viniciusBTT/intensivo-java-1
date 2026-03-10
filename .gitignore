@@ -28,3 +28,38 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java
+
+# Compiled class files
+*.class
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Maven build output
+target/
+
+# Eclipse and other IDEs
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VS Code workspace
+.vscode/
+
+# MacOS Finder metadata
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Package dependency directories
+node_modules/
+
+# Environment files
+.env
+.env.local
