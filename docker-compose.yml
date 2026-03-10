@@ -1,14 +1,15 @@
-services:
   mysql:
     image: mysql:8.4
     container_name: intensivo-mysql
     environment:
+      MYSQL_DATABASE: intensivo_java
       MYSQL_ROOT_PASSWORD: senha234
-      MYSQL_DATABASE: backend
+      MYSQL_ROOT_HOST: "%"
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+    
 
 volumes:
-  mysql_data:
+  mysql-data:
