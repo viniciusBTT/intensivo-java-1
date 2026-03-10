@@ -3,8 +3,8 @@ spring:
     name: intensivo-java
   datasource:
     url: jdbc:mysql://localhost:3306/backend?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:senha234}
+    username: root
+    password: senha234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -12,7 +12,7 @@ spring:
   thymeleaf:
     cache: false
 server:
-  port: 8095
+  port: 8080
 logging:
   level:
     root: INFO

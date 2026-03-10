@@ -2,7 +2,3 @@
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/HomeController.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/clientes/ClienteController.java
 /home/vinib/projetos/java/src/main/java/com/intensivo/java/controller/contas/ContaController.java
-/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/clientes/ClienteForm.java
-/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/contas/ContaCorrenteForm.java
-/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/contas/ContaForm.java
-/home/vinib/projetos/java/src/main/java/com/intensivo/java/dto/form/contas/ContaJuridicaForm.java

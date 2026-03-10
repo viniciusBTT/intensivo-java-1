@@ -1,6 +1,5 @@
 package com.intensivo.java.controller.clientes;
 
-import com.intensivo.java.dto.form.clientes.ClienteForm;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ public class ClienteController {
 
     @GetMapping("/clientes/novo")
     public String novo(Model model) {
-        model.addAttribute("form", new ClienteForm());
         model.addAttribute("tituloFormulario", "Novo Cliente");
         model.addAttribute("tipoClientes", List.of("Pessoa Fisica", "Pessoa Juridica"));
         return "clientes/form";

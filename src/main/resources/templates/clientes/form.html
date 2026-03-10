@@ -11,58 +11,58 @@
         </div>
     </section>
 
-    <form class="card app-card p-4" th:object="${form}" onsubmit="return false;">
+    <form class="card app-card p-4" onsubmit="return false;">
         <div class="row g-3">
             <div class="col-md-3">
                 <label class="form-label" for="tipoCliente">Tipo</label>
-                <select id="tipoCliente" th:field="*{tipoCliente}" class="form-select">
+                <select id="tipoCliente" name="tipoCliente" class="form-select">
                     <option value="">Selecione</option>
                     <option th:each="tipo : ${tipoClientes}" th:value="${tipo}" th:text="${tipo}"></option>
                 </select>
             </div>
             <div class="col-md-5">
                 <label class="form-label" for="nome">Nome / Razão social</label>
-                <input id="nome" th:field="*{nome}" class="form-control">
+                <input id="nome" name="nome" class="form-control">
             </div>
             <div class="col-md-4">
                 <label class="form-label" for="documento">CPF / CNPJ</label>
-                <input id="documento" th:field="*{documento}" class="form-control">
+                <input id="documento" name="documento" class="form-control">
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="email">Email</label>
-                <input id="email" th:field="*{email}" class="form-control">
+                <input id="email" name="email" class="form-control">
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="telefone">Telefone</label>
-                <input id="telefone" th:field="*{telefone}" class="form-control">
+                <input id="telefone" name="telefone" class="form-control">
             </div>
             <div class="col-md-4">
                 <label class="form-label" for="cep">CEP</label>
-                <input id="cep" th:field="*{cep}" class="form-control">
+                <input id="cep" name="cep" class="form-control">
             </div>
             <div class="col-md-8">
                 <label class="form-label" for="logradouro">Logradouro</label>
-                <input id="logradouro" th:field="*{logradouro}" class="form-control">
+                <input id="logradouro" name="logradouro" class="form-control">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="numero">Numero</label>
-                <input id="numero" th:field="*{numero}" class="form-control">
+                <input id="numero" name="numero" class="form-control">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="complemento">Complemento</label>
-                <input id="complemento" th:field="*{complemento}" class="form-control">
+                <input id="complemento" name="complemento" class="form-control">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="bairro">Bairro</label>
-                <input id="bairro" th:field="*{bairro}" class="form-control">
+                <input id="bairro" name="bairro" class="form-control">
             </div>
             <div class="col-md-1">
                 <label class="form-label" for="uf">UF</label>
-                <input id="uf" th:field="*{uf}" class="form-control">
+                <input id="uf" name="uf" class="form-control">
             </div>
             <div class="col-md-5">
                 <label class="form-label" for="cidade">Cidade</label>
-                <input id="cidade" th:field="*{cidade}" class="form-control">
+                <input id="cidade" name="cidade" class="form-control">
             </div>
         </div>
         <div class="d-flex gap-2 justify-content-end mt-4">
