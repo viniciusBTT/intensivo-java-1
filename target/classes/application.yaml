@@ -2,7 +2,7 @@ spring:
   application:
     name: intensivo-java
   datasource:
-    url: jdbc:mysql://localhost:3306/backend?createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_NAME:intensivo_java}?createDatabaseIfNotExist=true
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:senha234}
     driver-class-name: com.mysql.cj.jdbc.Driver
