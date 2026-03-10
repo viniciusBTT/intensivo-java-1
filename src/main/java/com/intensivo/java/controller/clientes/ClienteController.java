@@ -23,6 +23,11 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
+    @ModelAttribute("form")
+    public ClienteForm initForm() {
+        return new ClienteForm();
+    }
+
     @GetMapping("/clientes")
     public String listar(Model model) {
         model.addAttribute("clientes", clienteService.listarTodos());
