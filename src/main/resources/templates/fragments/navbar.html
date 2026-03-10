@@ -19,9 +19,6 @@
                     <a class="nav-link" th:classappend="${active == 'contas' ? 'active' : ''}" th:href="@{/contas}">Contas</a>
                 </li>
             </ul>
-            <form th:action="@{/logout}" method="post" class="d-flex">
-                <button class="btn btn-outline-dark btn-sm" type="submit">Sair</button>
-            </form>
         </div>
     </div>
 </nav>

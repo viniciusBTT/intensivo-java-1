@@ -2,54 +2,18 @@ spring:
   application:
     name: intensivo-java
   datasource:
-    url: jdbc:mysql://localhost:3306/backend?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/backend?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:senha234}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-    open-in-view: false
-    properties:
-      hibernate:
-        format_sql: true
-        jdbc:
-          time_zone: UTC
+      ddl-auto: none
   thymeleaf:
     cache: false
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: false
-  jackson:
-    time-zone: America/Sao_Paulo
 server:
   port: 8095
-  error:
-    include-message: never
 logging:
   level:
     root: INFO
     com.intensivo.java: INFO
-    org.springframework.boot.webmvc.autoconfigure.WelcomePageHandlerMapping: WARN
-app:
-  security:
-    default-admin-username: ${APP_ADMIN_USERNAME:admin}
-    default-admin-password: ${APP_ADMIN_PASSWORD:admin123}
-    default-attendant-username: ${APP_ATTENDANT_USERNAME:atendente}
-    default-attendant-password: ${APP_ATTENDANT_PASSWORD:atendente123}
-  cep:
-    base-url: ${CEP_BASE_URL:https://viacep.com.br/ws}
-    connect-timeout: ${CEP_CONNECT_TIMEOUT:2s}
-    read-timeout: ${CEP_READ_TIMEOUT:4s}
-
----
-spring:
-  config:
-    activate:
-      on-profile: test
-  jpa:
-    hibernate:
-      ddl-auto: create
-  thymeleaf:
-    cache: false

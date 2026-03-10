@@ -3,20 +3,12 @@ services:
     image: mysql:8.4
     container_name: intensivo-mysql
     environment:
-      MYSQL_DATABASE: intensivo_java
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: senha234
+      MYSQL_ROOT_PASSWORD: senha234
+      MYSQL_DATABASE: backend
     ports:
       - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  mysql-data:
+  mysql_data:

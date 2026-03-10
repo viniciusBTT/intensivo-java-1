@@ -15,53 +15,22 @@
         </div>
     </section>
 
-    <div th:replace="~{fragments/messages :: messages}"></div>
-
     <div class="card app-card">
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table app-table mb-0">
                     <thead>
                     <tr>
-                        <th>Número</th>
-                        <th>Agência</th>
                         <th>Tipo</th>
                         <th>Titular</th>
                         <th>Status</th>
                         <th>Saldo inicial</th>
                         <th>Tarifa</th>
-                        <th class="text-end">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:if="${#lists.isEmpty(contas)}">
-                        <td colspan="8" class="text-center text-secondary py-5">Nenhuma conta cadastrada até o momento.</td>
-                    </tr>
-                    <tr th:each="conta : ${contas}">
-                        <td th:text="${conta.numero}">00000001</td>
-                        <td th:text="${conta.agencia}">0001</td>
-                        <td th:text="${conta.tipoConta}">Conta Corrente</td>
-                        <td th:text="${conta.cliente.nome}">Titular</td>
-                        <td><span class="badge text-bg-light" th:text="${conta.status}">ATIVA</span></td>
-                        <td th:text="${#numbers.formatDecimal(conta.saldoInicial, 1, 'POINT', 2, 'COMMA')}">0,00</td>
-                        <td th:text="${#numbers.formatDecimal(conta.calcularTarifaMensal(), 1, 'POINT', 2, 'COMMA')}">0,00</td>
-                        <td class="text-end">
-                            <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
-                                <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${conta.tipoConta == 'Conta Corrente'}"
-                                   th:href="@{'/contas/corrente/' + ${conta.id} + '/editar'}">Editar</a>
-                                <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${conta.tipoConta == 'Conta Juridica'}"
-                                   th:href="@{'/contas/juridica/' + ${conta.id} + '/editar'}">Editar</a>
-                                <form th:action="@{'/contas/' + ${conta.id} + '/excluir'}"
-                                      method="post"
-                                      class="d-inline"
-                                      data-confirm-delete
-                                      data-confirm-text="Deseja realmente excluir esta conta?">
-                                    <button class="btn btn-sm btn-outline-danger" type="submit">Excluir</button>
-                                </form>
-                            </div>
-                        </td>
+                        <td colspan="5" class="text-center text-secondary py-5">Nenhuma conta cadastrada nesta versão da aula 1.</td>
                     </tr>
                     </tbody>
                 </table>
@@ -69,6 +38,5 @@
         </div>
     </div>
 </main>
-<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
 </body>
 </html>
