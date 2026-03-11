@@ -24,7 +24,7 @@ spring:
   jackson:
     time-zone: America/Sao_Paulo
 server:
-  port: 8095
+  port: 8080
   error:
     include-message: never
 logging:
