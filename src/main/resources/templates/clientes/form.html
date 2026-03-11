@@ -11,7 +11,9 @@
         </div>
     </section>
 
-    <form class="card app-card p-4" onsubmit="return false;">
+    <div class="alert alert-success mb-4" th:if="${mensagemSucesso}" th:text="${mensagemSucesso}"></div>
+
+    <form class="card app-card p-4" th:action="@{/clientes}" method="post">
         <div class="row g-3">
             <div class="col-md-3">
                 <label class="form-label" for="tipoCliente">Tipo</label>
@@ -67,7 +69,7 @@
         </div>
         <div class="d-flex gap-2 justify-content-end mt-4">
             <a class="btn btn-outline-dark" th:href="@{/clientes}">Cancelar</a>
-            <button class="btn btn-app" type="submit" disabled>Salvar cliente</button>
+            <button class="btn btn-app" type="submit">Salvar cliente</button>
         </div>
     </form>
 </main>
