@@ -16,11 +16,7 @@
     <form class="card app-card p-4"
           th:action="@{${submitPath}}"
           th:object="${form}"
-          method="post"
-          data-cep-form>
-        <div class="alert alert-danger shadow-sm" role="alert" th:if="${#fields.hasGlobalErrors()}">
-            <div th:each="error : ${#fields.globalErrors()}" th:text="${error}"></div>
-        </div>
+          method="post">
         <div class="row g-3">
             <div class="col-md-3">
                 <label class="form-label" for="tipoCliente">Tipo</label>
@@ -28,58 +24,51 @@
                     <option value="">Selecione</option>
                     <option th:each="tipo : ${tipoClientes}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
                 </select>
-                <div class="invalid-feedback d-block" th:errors="*{tipoCliente}"></div>
             </div>
             <div class="col-md-5">
                 <label class="form-label" for="nome">Nome / Razão social</label>
                 <input id="nome" th:field="*{nome}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{nome}"></div>
             </div>
             <div class="col-md-4">
                 <label class="form-label" for="documento">CPF / CNPJ</label>
                 <input id="documento" th:field="*{documento}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{documento}"></div>
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="email">Email</label>
                 <input id="email" th:field="*{email}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{email}"></div>
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="telefone">Telefone</label>
                 <input id="telefone" th:field="*{telefone}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{telefone}"></div>
             </div>
 
             <div class="col-md-4">
                 <label class="form-label" for="cep">CEP</label>
-                <input id="cep" th:field="*{cep}" class="form-control" data-cep-input>
-                <div class="invalid-feedback d-block" th:errors="*{cep}"></div>
+                <input id="cep" th:field="*{endereco.cep}" class="form-control">
             </div>
             <div class="col-md-8">
                 <label class="form-label" for="logradouro">Logradouro</label>
-                <input id="logradouro" th:field="*{logradouro}" class="form-control" data-cep-target="logradouro" readonly>
+                <input id="logradouro" th:field="*{endereco.logradouro}" class="form-control">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="numero">Numero</label>
-                <input id="numero" th:field="*{numero}" class="form-control">
-                <div class="invalid-feedback d-block" th:errors="*{numero}"></div>
+                <input id="numero" th:field="*{endereco.numero}" class="form-control">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="complemento">Complemento</label>
-                <input id="complemento" th:field="*{complemento}" class="form-control">
+                <input id="complemento" th:field="*{endereco.complemento}" class="form-control">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="bairro">Bairro</label>
-                <input id="bairro" th:field="*{bairro}" class="form-control" data-cep-target="bairro" readonly>
+                <input id="bairro" th:field="*{endereco.bairro}" class="form-control">
             </div>
             <div class="col-md-1">
                 <label class="form-label" for="uf">UF</label>
-                <input id="uf" th:field="*{uf}" class="form-control" data-cep-target="uf" readonly>
+                <input id="uf" th:field="*{endereco.uf}" class="form-control">
             </div>
             <div class="col-md-5">
                 <label class="form-label" for="cidade">Cidade</label>
-                <input id="cidade" th:field="*{cidade}" class="form-control" data-cep-target="cidade" readonly>
+                <input id="cidade" th:field="*{endereco.cidade}" class="form-control">
             </div>
         </div>
         <div class="d-flex gap-2 justify-content-end mt-4">

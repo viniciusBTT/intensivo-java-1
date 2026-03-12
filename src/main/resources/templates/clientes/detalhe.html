@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Detalhe do Cliente')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('clientes')}"></div>
+<main class="container py-4">
+    <section class="page-header mb-4">
+        <div>
+            <span class="hero-badge">Cliente</span>
+            <h1 class="display-title mt-2 mb-0" th:text="${cliente.nome}">Detalhe do Cliente</h1>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-outline-dark" th:href="@{/clientes}">Voltar</a>
+        </div>
+    </section>
+
+    <div class="card app-card">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <strong>ID</strong>
+                    <div th:text="${cliente.id}"></div>
+                </div>
+                <div class="col-md-3">
+                    <strong>Tipo</strong>
+                    <div th:text="${cliente.tipoCliente}"></div>
+                </div>
+                <div class="col-md-6">
+                    <strong>Nome</strong>
+                    <div th:text="${cliente.nome}"></div>
+                </div>
+                <div class="col-md-4">
+                    <strong>Documento</strong>
+                    <div th:text="${cliente.documento}"></div>
+                </div>
+                <div class="col-md-4">
+                    <strong>Email</strong>
+                    <div th:text="${cliente.email}"></div>
+                </div>
+                <div class="col-md-4">
+                    <strong>Telefone</strong>
+                    <div th:text="${cliente.telefone}"></div>
+                </div>
+                <div class="col-md-3">
+                    <strong>CEP</strong>
+                    <div th:text="${cliente.cep}"></div>
+                </div>
+                <div class="col-md-6">
+                    <strong>Logradouro</strong>
+                    <div th:text="${cliente.logradouro}"></div>
+                </div>
+                <div class="col-md-3">
+                    <strong>Numero</strong>
+                    <div th:text="${cliente.numero}"></div>
+                </div>
+                <div class="col-md-4">
+                    <strong>Complemento</strong>
+                    <div th:text="${cliente.complemento}"></div>
+                </div>
+                <div class="col-md-4">
+                    <strong>Bairro</strong>
+                    <div th:text="${cliente.bairro}"></div>
+                </div>
+                <div class="col-md-1">
+                    <strong>UF</strong>
+                    <div th:text="${cliente.uf}"></div>
+                </div>
+                <div class="col-md-3">
+                    <strong>Cidade</strong>
+                    <div th:text="${cliente.cidade}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

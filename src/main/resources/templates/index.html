@@ -8,11 +8,11 @@
         <div>
             <span class="hero-badge">Painel de gestão</span>
             <h1 class="display-title mt-3 mb-2">Operação interna da agência</h1>
-            <p class="text-secondary mb-0">Usuário autenticado: <strong th:text="${usuarioLogado}">admin</strong></p>
+            <p class="text-secondary mb-0">Acesso direto ao sistema para cadastro de clientes e contas.</p>
         </div>
         <div class="hero-actions">
             <a class="btn btn-app" th:href="@{/clientes/novo}">Novo cliente</a>
-            <a class="btn btn-outline-dark" th:href="@{/contas/corrente/novo}">Nova conta corrente</a>
+            <a class="btn btn-outline-dark" th:href="@{/contas/novo}">Nova conta</a>
         </div>
     </section>
 
@@ -42,8 +42,7 @@
                     <h2 class="section-title">Fluxos rápidos</h2>
                     <div class="d-grid gap-2">
                         <a class="btn btn-outline-dark" th:href="@{/clientes/novo}">Cadastrar cliente</a>
-                        <a class="btn btn-outline-dark" th:href="@{/contas/corrente/novo}">Abrir conta corrente</a>
-                        <a class="btn btn-outline-dark" th:href="@{/contas/juridica/novo}">Abrir conta jurídica</a>
+                        <a class="btn btn-outline-dark" th:href="@{/contas/novo}">Abrir conta</a>
                     </div>
                 </div>
             </div>
@@ -53,10 +52,10 @@
                 <div class="card-body">
                     <h2 class="section-title">Notas operacionais</h2>
                     <ul class="text-secondary mb-0 ps-3">
-                        <li>O endereço do cliente é validado por CEP antes da persistência.</li>
+                        <li>O endereço do cliente e preenchido manualmente no cadastro.</li>
                         <li>Contas correntes aceitam apenas cliente PF.</li>
                         <li>Contas jurídicas aceitam apenas cliente PJ.</li>
-                        <li>Exclusões exigem perfil administrador.</li>
+                        <li>Erros de regra aparecem diretamente nas telas e na API.</li>
                     </ul>
                 </div>
             </div>

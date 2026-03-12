@@ -10,8 +10,7 @@
             <h1 class="display-title mt-2 mb-0">Contas correntes e jurídicas</h1>
         </div>
         <div class="d-flex gap-2 flex-wrap">
-            <a class="btn btn-app" th:href="@{/contas/corrente/novo}">Nova corrente</a>
-            <a class="btn btn-outline-dark" th:href="@{/contas/juridica/novo}">Nova jurídica</a>
+            <a class="btn btn-app" th:href="@{/contas/novo}">Nova conta</a>
         </div>
     </section>
 
@@ -48,11 +47,7 @@
                         <td class="text-end">
                             <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
                                 <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${conta.tipoConta == 'Conta Corrente'}"
-                                   th:href="@{'/contas/corrente/' + ${conta.id} + '/editar'}">Editar</a>
-                                <a class="btn btn-sm btn-outline-dark"
-                                   th:if="${conta.tipoConta == 'Conta Juridica'}"
-                                   th:href="@{'/contas/juridica/' + ${conta.id} + '/editar'}">Editar</a>
+                                   th:href="@{'/contas/' + ${conta.id} + '/editar'}">Editar</a>
                                 <form th:action="@{'/contas/' + ${conta.id} + '/excluir'}"
                                       method="post"
                                       class="d-inline"

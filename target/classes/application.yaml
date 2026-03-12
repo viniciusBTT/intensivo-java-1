@@ -33,16 +33,6 @@ logging:
     com.intensivo.java: INFO
     org.springframework.boot.webmvc.autoconfigure.WelcomePageHandlerMapping: WARN
 app:
-  security:
-    default-admin-username: ${APP_ADMIN_USERNAME:admin}
-    default-admin-password: ${APP_ADMIN_PASSWORD:admin123}
-    default-attendant-username: ${APP_ATTENDANT_USERNAME:atendente}
-    default-attendant-password: ${APP_ATTENDANT_PASSWORD:atendente123}
-  cep:
-    base-url: ${CEP_BASE_URL:https://viacep.com.br/ws}
-    connect-timeout: ${CEP_CONNECT_TIMEOUT:2s}
-    read-timeout: ${CEP_READ_TIMEOUT:4s}
-
 ---
 spring:
   config:
