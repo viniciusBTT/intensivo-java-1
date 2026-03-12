@@ -57,7 +57,7 @@ public class ContaServiceImpl implements ContaService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Conta criar(Conta form) {
         Cliente cliente = buscarCliente(form.getCliente().getId());
         Conta conta = new Conta();
