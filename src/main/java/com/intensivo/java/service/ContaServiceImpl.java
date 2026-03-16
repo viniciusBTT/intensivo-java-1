@@ -3,7 +3,6 @@ package com.intensivo.java.service;
 import com.intensivo.java.model.Cliente;
 import com.intensivo.java.model.Conta;
 import com.intensivo.java.model.ContaTipo;
-import com.intensivo.java.model.TipoCliente;
 import com.intensivo.java.repository.ClienteRepository;
 import com.intensivo.java.repository.ContaRepository;
 import java.security.SecureRandom;
@@ -40,39 +39,22 @@ public class ContaServiceImpl implements ContaService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Cliente> listarClientesCorrente() {
-        return clienteRepository.findAllByTipoClienteOrderByNomeAsc(TipoCliente.PF);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Cliente> listarClientesJuridicos() {
-        return clienteRepository.findAllByTipoClienteOrderByNomeAsc(TipoCliente.PJ);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Cliente> listarTodasClientes() {
+    public List<Cliente> listarClientes() {
         return clienteRepository.findAllByOrderByIdDesc();
     }
 
     @Override
     @Transactional
     public Conta criar(Conta form) {
-        Cliente cliente = buscarCliente(form.getCliente().getId());
-        Conta conta = new Conta();
-        aplicarConta(conta, cliente, form);
-        Conta salva = contaRepository.save(conta);
-        log.info("Conta {} criada para cliente {}", salva.getNumero(), cliente.getId());
-        return salva;
+        Conta conta = salvar(new Conta(), form);
+        log.info("Conta {} criada para cliente {}", conta.getNumero(), conta.getCliente().getId());
+        return conta;
     }
 
     @Override
     @Transactional
     public Conta atualizar(Long id, Conta form) {
-        Conta conta = buscar(id);
-        Cliente cliente = buscarCliente(form.getCliente().getId());
-        aplicarConta(conta, cliente, form);
+        Conta conta = salvar(buscar(id), form);
         log.info("Conta {} atualizada", conta.getNumero());
         return conta;
     }
@@ -89,6 +71,12 @@ public class ContaServiceImpl implements ContaService {
     @Transactional(readOnly = true)
     public long contarContas() {
         return contaRepository.count();
+    }
+
+    private Conta salvar(Conta conta, Conta form) {
+        Cliente cliente = buscarCliente(form.getCliente().getId());
+        aplicarConta(conta, cliente, form);
+        return contaRepository.save(conta);
     }
 
     private void aplicarConta(Conta conta, Cliente cliente, Conta form) {

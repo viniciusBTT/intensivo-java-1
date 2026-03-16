@@ -36,24 +36,16 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     @Transactional
     public Cliente criar(Cliente form) {
-        String documento = normalizarDocumento(form.getTipoCliente(), form.getDocumento());
-        validarDocumentoDuplicado(documento, null, form.getTipoCliente());
-
-        Cliente cliente = new Cliente();
-        aplicarCliente(cliente, form, documento);
-        Cliente salvo = clienteRepository.save(cliente);
-        log.info("Cliente {} criado com documento {}", form.getTipoCliente(), mascararDocumento(documento));
-        return salvo;
+        Cliente cliente = salvar(new Cliente(), form);
+        log.info("Cliente {} criado com documento {}", cliente.getTipoCliente(), mascararDocumento(cliente.getDocumento()));
+        return cliente;
     }
 
     @Override
     @Transactional
     public Cliente atualizar(Long id, Cliente form) {
-        Cliente cliente = buscar(id);
-        String documento = normalizarDocumento(form.getTipoCliente(), form.getDocumento());
-        validarDocumentoDuplicado(documento, id, form.getTipoCliente());
-        aplicarCliente(cliente, form, documento);
-        log.info("Cliente {} atualizado com documento {}", form.getTipoCliente(), mascararDocumento(documento));
+        Cliente cliente = salvar(buscar(id), form);
+        log.info("Cliente {} atualizado com documento {}", cliente.getTipoCliente(), mascararDocumento(cliente.getDocumento()));
         return cliente;
     }
 
@@ -74,11 +66,15 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.count();
     }
 
+    private Cliente salvar(Cliente cliente, Cliente form) {
+        String documento = normalizarDocumento(form.getTipoCliente(), form.getDocumento());
+        validarDocumentoDuplicado(documento, cliente.getId(), form.getTipoCliente());
+        aplicarCliente(cliente, form, documento);
+        return clienteRepository.save(cliente);
+    }
+
     private void aplicarCliente(Cliente cliente, Cliente form, String documento) {
-        Endereco endereco = form.getEndereco();
-        if (endereco == null) {
-            endereco = new Endereco();
-        }
+        Endereco endereco = form.getEndereco() == null ? new Endereco() : form.getEndereco();
         cliente.atualizarCadastro(
                 form.getTipoCliente(),
                 textoNormalizado(form.getNome()),

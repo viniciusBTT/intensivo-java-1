@@ -37,7 +37,7 @@ public class ContaController {
         model.addAttribute("modoEdicao", false);
         model.addAttribute("submitPath", "/contas");
         model.addAttribute("tituloFormulario", "Nova Conta");
-        model.addAttribute("clientes", contaService.listarTodasClientes());
+        model.addAttribute("clientes", contaService.listarClientes());
         model.addAttribute("statusList", ContaStatus.values());
         model.addAttribute("tiposConta", ContaTipo.values());
         return "contas/form";
@@ -57,7 +57,7 @@ public class ContaController {
             model.addAttribute("modoEdicao", false);
             model.addAttribute("submitPath", "/contas");
             model.addAttribute("tituloFormulario", "Nova Conta");
-            model.addAttribute("clientes", contaService.listarTodasClientes());
+            model.addAttribute("clientes", contaService.listarClientes());
             model.addAttribute("statusList", ContaStatus.values());
             model.addAttribute("tiposConta", ContaTipo.values());
             return "contas/form";
@@ -71,7 +71,7 @@ public class ContaController {
         model.addAttribute("modoEdicao", true);
         model.addAttribute("submitPath", "/contas/" + conta.getId());
         model.addAttribute("tituloFormulario", "Editar Conta");
-        model.addAttribute("clientes", contaService.listarTodasClientes());
+        model.addAttribute("clientes", contaService.listarClientes());
         model.addAttribute("statusList", ContaStatus.values());
         model.addAttribute("tiposConta", ContaTipo.values());
         model.addAttribute("numeroConta", conta.getNumero());
@@ -95,7 +95,7 @@ public class ContaController {
             model.addAttribute("modoEdicao", true);
             model.addAttribute("submitPath", "/contas/" + form.getId());
             model.addAttribute("tituloFormulario", "Editar Conta");
-            model.addAttribute("clientes", contaService.listarTodasClientes());
+            model.addAttribute("clientes", contaService.listarClientes());
             model.addAttribute("statusList", ContaStatus.values());
             model.addAttribute("tiposConta", ContaTipo.values());
             return "contas/form";

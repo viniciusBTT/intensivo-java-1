@@ -10,11 +10,7 @@ public interface ContaService {
 
     Conta buscar(Long id);
 
-    List<Cliente> listarClientesCorrente();
-
-    List<Cliente> listarClientesJuridicos();
-
-    List<Cliente> listarTodasClientes();
+    List<Cliente> listarClientes();
 
     Conta criar(Conta conta);
 

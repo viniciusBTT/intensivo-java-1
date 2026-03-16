@@ -34,7 +34,7 @@ public class ClienteController {
         model.addAttribute("modoEdicao", false);
         model.addAttribute("submitPath", "/clientes");
         model.addAttribute("tituloFormulario", "Novo Cliente");
-        model.addAttribute("tipoClientes", TipoCliente.values());
+        model.addAttribute("tipoClientes", TipoCliente.values());       
         return "clientes/form";
     }
 
