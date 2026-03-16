@@ -1,0 +1,92 @@
+{
+  "info": {
+    "_postman_id": "0c675e12-9247-4af4-8b28-b083bbcb63d5",
+    "name": "Clientes REST Simples",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "clienteId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Criar cliente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.id) {",
+              "  pm.collectionVariables.set('clienteId', json.id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Maria Oliveira\",\n  \"documento\": \"12345678901\",\n  \"email\": \"maria@example.com\",\n  \"telefone\": \"11999998888\",\n  \"cep\": \"01001-000\",\n  \"logradouro\": \"Praca da Se\",\n  \"numero\": \"100\",\n  \"complemento\": \"Apto 10\",\n  \"bairro\": \"Se\",\n  \"cidade\": \"Sao Paulo\",\n  \"uf\": \"SP\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/clientes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "clientes"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar clientes",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/clientes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "clientes"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Buscar cliente por id",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/clientes/{{clienteId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "clientes",
+            "{{clienteId}}"
+          ]
+        }
+      }
+    }
+  ]
+}
