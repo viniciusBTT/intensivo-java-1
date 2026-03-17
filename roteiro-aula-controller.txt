@@ -1,0 +1,43 @@
+Roteiro de aula: RequestParam, PathVariable e RequestBody
+
+1. O que e @RequestParam
+@RequestParam recebe um valor enviado na query string da requisicao.
+Ele e util quando voce quer ler dados simples enviados na URL depois do sinal de interrogacao.
+Exemplo desta aula:
+GET /api/exemplos/request-param?nome=Ana
+No metodo, o valor recebido sera "Ana".
+
+2. O que e @PathVariable
+@PathVariable recebe um valor que veio da propria URL.
+Esse valor entra no metodo como parametro.
+Exemplo desta aula:
+GET /api/exemplos/path-variable/Ana
+No metodo, o valor recebido sera "Ana".
+
+3. O que e @RequestBody
+@RequestBody pega os dados enviados no corpo da requisicao, normalmente em JSON.
+O Spring converte esse JSON para um objeto Java.
+Exemplo desta aula:
+POST /api/exemplos/request-body
+Body:
+{
+  "nome": "Joao",
+  "mensagem": "Aprendendo RequestBody"
+}
+
+Diferenca pratica
+- RequestParam: le um valor enviado na query string.
+- PathVariable: le um valor que faz parte do caminho da URL.
+- RequestBody: le os dados enviados no corpo da requisicao.
+
+Sequencia sugerida para seguir em aula
+1. Mostrar a classe com @RequestMapping("/api/exemplos") apenas como rota base da controller.
+2. Chamar /request-param?nome=Ana e destacar que "Ana" veio da query string.
+3. Chamar /path-variable/Ana e destacar que "Ana" veio da URL.
+4. Fazer um POST em /request-body com JSON e mostrar que o Spring converteu o corpo para o record MensagemRequest.
+5. Fechar comparando onde cada dado chega no backend.
+
+Fechamento
+- @RequestParam captura dado da query string.
+- @PathVariable captura dado do caminho.
+- @RequestBody captura dado do corpo da requisicao.

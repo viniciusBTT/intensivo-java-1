@@ -3,8 +3,8 @@ package com.intensivo.java.controller;
 import com.intensivo.java.model.Cliente;
 import com.intensivo.java.service.ClienteService;
 import jakarta.validation.Valid;
-import java.net.URI;
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -24,28 +24,54 @@ public class ClienteRestController {
     private final ClienteService clienteService;
 
     @GetMapping
-    public List<Cliente> listar() {
-        return clienteService.listarTodos();
+    public ResponseEntity<?> listar() {
+        try {
+            List<Cliente> clientes = clienteService.listarTodos();
+            return ResponseEntity.ok(clientes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro interno ao listar clientes.");
+        }
     }
 
     @GetMapping("/{id}")
-    public Cliente buscar(@PathVariable Long id) {
-        return clienteService.buscarPorId(id);
+    public ResponseEntity<?> buscar(@PathVariable Long id) {
+        try {
+            Cliente cliente = clienteService.buscarPorId(id);
+            return ResponseEntity.ok(cliente);
+        } catch (Exception e) {
+            if (e instanceof ResponseStatusException responseStatusException) {
+                return ResponseEntity.status(responseStatusException.getStatusCode())
+                        .body(responseStatusException.getReason());
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro interno ao buscar cliente.");
+        }
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> criar(@Valid @RequestBody Cliente request) {
-        request.setId(null);
-        Cliente cliente = clienteService.criar(request.normalizarCampos());
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(cliente.getId())
-                .toUri();
-        return ResponseEntity.created(location).body(cliente);
+    public ResponseEntity<?> criar(@Valid @RequestBody Cliente request) {
+        try {
+            Cliente cliente = clienteService.criar(request);
+            return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro interno ao criar cliente.");
+        }
     }
 
     @PatchMapping("/{id}")
-    public Cliente atualizar(@PathVariable Long id, @Valid @RequestBody Cliente request) {
-        return clienteService.atualizar(id, request.normalizarCampos());
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente request) {
+        try {
+            Cliente cliente = clienteService.atualizar(id, request);
+            return ResponseEntity.ok(cliente);
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro interno ao atualizar cliente.");
+        }
     }
 }

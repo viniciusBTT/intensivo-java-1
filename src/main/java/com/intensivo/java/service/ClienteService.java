@@ -29,31 +29,28 @@ public class ClienteService {
     @Transactional
     public Cliente criar(Cliente cliente) {
         cliente.setId(null);
-        if (clienteRepository.existsByDocumento(cliente.getDocumento())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ja existe pessoa cadastrada com esse cpf.");
-        }
+        cliente.normalizarCampos();
+        validarDocumentoDisponivel(cliente.getDocumento(), null);
         return clienteRepository.save(cliente);
     }
 
     @Transactional
     public Cliente atualizar(Long id, Cliente clienteAtualizado) {
         Cliente clienteExistente = buscarPorId(id);
-        if (clienteRepository.existsByDocumentoAndIdNot(clienteAtualizado.getDocumento(), id)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ja existe pessoa cadastrada com esse cpf.");
-        }
-
-        clienteExistente.setNome(clienteAtualizado.getNome());
-        clienteExistente.setDocumento(clienteAtualizado.getDocumento());
-        clienteExistente.setEmail(clienteAtualizado.getEmail());
-        clienteExistente.setTelefone(clienteAtualizado.getTelefone());
-        clienteExistente.setCep(clienteAtualizado.getCep());
-        clienteExistente.setLogradouro(clienteAtualizado.getLogradouro());
-        clienteExistente.setNumero(clienteAtualizado.getNumero());
-        clienteExistente.setComplemento(clienteAtualizado.getComplemento());
-        clienteExistente.setBairro(clienteAtualizado.getBairro());
-        clienteExistente.setCidade(clienteAtualizado.getCidade());
-        clienteExistente.setUf(clienteAtualizado.getUf());
+        clienteAtualizado.normalizarCampos();
+        validarDocumentoDisponivel(clienteAtualizado.getDocumento(), id);
+        clienteExistente.atualizarCom(clienteAtualizado);
 
         return clienteRepository.save(clienteExistente);
+    }
+
+    private void validarDocumentoDisponivel(String documento, Long id) {
+        boolean documentoEmUso = id == null
+                ? clienteRepository.existsByDocumento(documento)
+                : clienteRepository.existsByDocumentoAndIdNot(documento, id);
+
+        if (documentoEmUso) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ja existe pessoa cadastrada com esse cpf.");
+        }
     }
 }

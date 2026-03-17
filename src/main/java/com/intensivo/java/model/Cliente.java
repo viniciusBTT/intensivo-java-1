@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -72,7 +74,9 @@ public class Cliente {
     @Column(nullable = false, length = 2)
     private String uf;
 
-    public Cliente normalizarCampos() {
+    @PrePersist
+    @PreUpdate
+    public void normalizarCampos() {
         nome = normalizar(nome);
         documento = normalizar(documento);
         email = normalizar(email).toLowerCase(Locale.ROOT);
@@ -80,18 +84,27 @@ public class Cliente {
         cep = normalizar(cep).replaceAll("\\D", "");
         logradouro = normalizar(logradouro);
         numero = normalizar(numero);
-        complemento = normalizarOpcional(complemento);
+        complemento = normalizar(complemento);
         bairro = normalizar(bairro);
         cidade = normalizar(cidade);
         uf = normalizar(uf).toUpperCase(Locale.ROOT);
-        return this;
+    }
+
+    public void atualizarCom(Cliente cliente) {
+        nome = cliente.getNome();
+        documento = cliente.getDocumento();
+        email = cliente.getEmail();
+        telefone = cliente.getTelefone();
+        cep = cliente.getCep();
+        logradouro = cliente.getLogradouro();
+        numero = cliente.getNumero();
+        complemento = cliente.getComplemento();
+        bairro = cliente.getBairro();
+        cidade = cliente.getCidade();
+        uf = cliente.getUf();
     }
 
     private String normalizar(String valor) {
-        return valor.trim();
-    }
-
-    private String normalizarOpcional(String valor) {
         if (valor == null) {
             return null;
         }
