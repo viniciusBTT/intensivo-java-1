@@ -38,16 +38,13 @@ public class ClienteService {
     public Cliente atualizar(Long id, Cliente clienteAtualizado) {
         Cliente clienteExistente = buscarPorId(id);
         clienteAtualizado.normalizarCampos();
-        validarDocumentoDisponivel(clienteAtualizado.getDocumento(), id);
         clienteExistente.atualizarCom(clienteAtualizado);
 
         return clienteRepository.save(clienteExistente);
     }
 
     private void validarDocumentoDisponivel(String documento, Long id) {
-        boolean documentoEmUso = id == null
-                ? clienteRepository.existsByDocumento(documento)
-                : clienteRepository.existsByDocumentoAndIdNot(documento, id);
+        boolean documentoEmUso = clienteRepository.existsByDocumento(documento);
 
         if (documentoEmUso) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ja existe pessoa cadastrada com esse cpf.");

@@ -9,6 +9,4 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     List<Cliente> findAllByOrderByIdDesc();
 
     boolean existsByDocumento(String documento);
-
-    boolean existsByDocumentoAndIdNot(String documento, Long id);
 }
