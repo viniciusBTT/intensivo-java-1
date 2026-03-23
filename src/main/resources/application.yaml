@@ -1,39 +1,41 @@
+# Configuracoes principais do Spring Boot.
 spring:
+  # Nome da aplicacao exibido nos metadados do Spring.
   application:
+    # Identificador da aplicacao.
     name: intensivo-java
-  datasource:
-    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_NAME:intensivo_java}?createDatabaseIfNotExist=true
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:senha234}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    open-in-view: false
-    properties:
-      hibernate:
-        format_sql: true
-        jdbc:
-          time_zone: UTC
-server:
-  port: 8080
-  error:
-    include-message: always
-logging:
-  level:
-    root: INFO
-    com.intensivo.java: INFO
 
----
-spring:
-  config:
-    activate:
-      on-profile: test
+  # Configuracao de conexao com o banco de dados.
   datasource:
-    url: jdbc:h2:mem:intensivo_java;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    # URL do MySQL com valores padrao via variaveis de ambiente.
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_NAME:intensivo_java}?createDatabaseIfNotExist=true
+    # Usuario usado na conexao com o banco.
+    username: ${DB_USERNAME:root}
+    # Senha usada na conexao com o banco.
+    password: ${DB_PASSWORD:senha234}
+
+  # Configuracoes do JPA e Hibernate.
   jpa:
+    # Ajustes especificos do Hibernate.
     hibernate:
-      ddl-auto: create-drop
+      # Atualiza a estrutura das tabelas automaticamente.
+      ddl-auto: update
+    # Desabilita o Open Session in View.
+    open-in-view: false
+    # Propriedades extras repassadas ao Hibernate.
+    properties:
+      # Bloco de propriedades nativas do Hibernate.
+      hibernate:
+        # Formata o SQL gerado para ficar mais legivel.
+        format_sql: true
+        # Configuracoes JDBC aplicadas pelo Hibernate.
+        jdbc:
+          # Define UTC como fuso padrao para datas no banco.
+          time_zone: UTC
+
+# Configuracoes do servidor web.
+server:
+  # Mantem a mensagem original de erro nas respostas.
+  error:
+    # Sempre inclui a mensagem de erro no retorno da API.
+    include-message: always
