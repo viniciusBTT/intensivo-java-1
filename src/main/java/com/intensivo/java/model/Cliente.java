@@ -57,7 +57,7 @@ public class Cliente {
     private String telefone;
 
     // Campos de endereco do cliente.
-    // Valida o formato do CEP aceitando com ou sem hifen.
+    // Valida o formato do CEP aceitando com ou sem hifen(regexp).
     @Pattern(regexp = "\\d{5}-?\\d{3}", message = "Informe um CEP valido.")
     // Coluna obrigatoria com tamanho maximo de 8 caracteres.
     @Column(nullable = false, length = 8)
